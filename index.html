@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>바이브 코딩 — Feel the Flow</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060912;
+    --surface: #0d1120;
+    --card: #111827;
+    --green: #00ff88;
+    --blue: #00cfff;
+    --pink: #ff3d7f;
+    --yellow: #ffe600;
+    --text: #eef0f8;
+    --muted: #5c6480;
+    --border: rgba(0,207,255,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── Grid BG ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,207,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,207,255,0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── Glow orbs ── */
+  .orb {
+    position: fixed; border-radius: 50%;
+    filter: blur(100px); pointer-events: none; z-index: 0;
+  }
+  .orb1 { width:700px;height:700px; background:rgba(0,255,136,0.05); top:-200px;right:-200px; animation:drift 10s ease-in-out infinite alternate; }
+  .orb2 { width:500px;height:500px; background:rgba(0,207,255,0.06); bottom:-100px;left:-100px; animation:drift 13s ease-in-out infinite alternate-reverse; }
+  .orb3 { width:300px;height:300px; background:rgba(255,61,127,0.04); top:40%;right:15%; animation:drift 8s ease-in-out infinite alternate; }
+  @keyframes drift { from{transform:translate(0,0) scale(1)} to{transform:translate(30px,20px) scale(1.08)} }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top:0; z-index:100;
+    display: flex; align-items:center; justify-content:space-between;
+    padding: 20px 5%;
+    background: rgba(6,9,18,0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px; letter-spacing:3px;
+    color: var(--green);
+    text-shadow: 0 0 24px rgba(0,255,136,0.55);
+  }
+  .logo span { color: var(--blue); }
+  .nav-links { display:flex; gap:36px; list-style:none; }
+  .nav-links a {
+    font-family:'Space Mono',monospace; font-size:11px;
+    letter-spacing:2px; text-transform:uppercase;
+    color:var(--muted); text-decoration:none;
+    transition:color .2s;
+  }
+  .nav-links a:hover { color:var(--blue); }
+  .nav-btn {
+    font-family:'Space Mono',monospace; font-size:11px;
+    letter-spacing:2px; text-transform:uppercase;
+    padding:10px 24px;
+    border:1px solid var(--green); color:var(--green);
+    background:transparent; border-radius:3px;
+    cursor:pointer; transition:all .2s;
+    text-decoration:none;
+  }
+  .nav-btn:hover { background:rgba(0,255,136,.1); box-shadow:0 0 24px rgba(0,255,136,.3); }
+
+  /* ── HERO ── */
+  .hero {
+    position:relative; z-index:1;
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding: 120px 5% 80px;
+    overflow:hidden;
+  }
+  .hero-eyebrow {
+    font-family:'Space Mono',monospace;
+    font-size:11px; letter-spacing:4px; text-transform:uppercase;
+    color:var(--green); margin-bottom:24px;
+    display:flex; align-items:center; gap:12px;
+    opacity:0; animation:fadeUp .8s .1s ease forwards;
+  }
+  .hero-eyebrow::before { content:''; width:36px; height:1px; background:var(--green); box-shadow:0 0 8px var(--green); }
+
+  .hero-title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size: clamp(72px,11vw,155px);
+    line-height:.92; letter-spacing:-1px;
+    margin-bottom:32px;
+  }
+  /* 글자 단위 split 애니메이션 */
+  .hero-title .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(60px) rotateX(-40deg);
+    animation: charReveal .6s ease forwards;
+    transform-origin: bottom center;
+  }
+  .hero-title .char-space { display: inline-block; width: .3em; }
+  .hero-title .g { color:var(--green); text-shadow:0 0 60px rgba(0,255,136,.5); }
+  .hero-title .b { color:var(--blue);  text-shadow:0 0 60px rgba(0,207,255,.5); display:block; }
+
+  @keyframes charReveal {
+    0%   { opacity:0; transform:translateY(60px) rotateX(-40deg); }
+    60%  { opacity:1; transform:translateY(-8px) rotateX(0deg); }
+    100% { opacity:1; transform:translateY(0) rotateX(0deg); }
+  }
+
+  /* 섹션 제목 — 클립 슬라이드업 */
+  .sec-title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(44px,5.5vw,72px); line-height:1.02;
+    margin-bottom:28px; letter-spacing:1px;
+  }
+  .sec-title .title-line {
+    display: block;
+    overflow: hidden;
+    line-height: 1.1;
+  }
+  .sec-title .title-inner {
+    display: block;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform .65s cubic-bezier(.16,1,.3,1), opacity .4s ease;
+  }
+  .reveal.visible .sec-title .title-inner {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .sec-title .title-inner:nth-child(1) { transition-delay: .05s; }
+  .sec-title .title-inner:nth-child(2) { transition-delay: .15s; }
+  .sec-title .title-inner:nth-child(3) { transition-delay: .25s; }
+
+  /* CTA 제목 — 네온 글리치 */
+  .cta-title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(56px,8vw,110px); line-height:.95;
+    margin-bottom:28px;
+    position: relative;
+  }
+  .cta-title .glitch-wrap {
+    display: inline-block;
+    position: relative;
+  }
+  .cta-title .glitch-wrap::before,
+  .cta-title .glitch-wrap::after {
+    content: attr(data-text);
+    position: absolute; top:0; left:0;
+    font-family:'Bebas Neue',sans-serif;
+    font-size: inherit; line-height: inherit;
+    pointer-events: none;
+  }
+  .cta-title .glitch-wrap::before {
+    color: var(--pink);
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+    animation: glitch-top 4s infinite linear;
+    opacity: 0;
+  }
+  .cta-title .glitch-wrap::after {
+    color: var(--blue);
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+    animation: glitch-bot 4s infinite linear;
+    opacity: 0;
+  }
+  @keyframes glitch-top {
+    0%,89%,100% { opacity:0; transform:none; }
+    90%  { opacity:.8; transform:translate(-3px, -2px); }
+    92%  { opacity:.8; transform:translate(3px, -2px); }
+    94%  { opacity:.8; transform:translate(-2px, 1px); }
+    96%  { opacity:0; }
+  }
+  @keyframes glitch-bot {
+    0%,89%,100% { opacity:0; transform:none; }
+    91%  { opacity:.8; transform:translate(3px, 2px); }
+    93%  { opacity:.8; transform:translate(-3px, 2px); }
+    95%  { opacity:.8; transform:translate(2px, -1px); }
+    96%  { opacity:0; }
+  }
+
+  /* 네온 플리커 (green span in CTA) */
+  @keyframes neonFlicker {
+    0%,19%,21%,23%,25%,54%,56%,100% {
+      text-shadow: 0 0 20px rgba(0,255,136,.6), 0 0 60px rgba(0,255,136,.4), 0 0 100px rgba(0,255,136,.2);
+    }
+    20%,22%,24%,55% {
+      text-shadow: none; opacity:.85;
+    }
+  }
+  .cta-green-flicker {
+    animation: neonFlicker 5s infinite;
+  }
+
+  .hero-desc {
+    max-width:520px; font-size:17px; font-weight:300;
+    color:var(--muted); line-height:1.85;
+    margin-bottom:48px;
+    opacity:0; animation:fadeUp .8s .3s ease forwards;
+  }
+  .hero-desc strong { color:var(--text); font-weight:400; }
+
+  .hero-actions {
+    display:flex; gap:16px; align-items:center; flex-wrap:wrap;
+    opacity:0; animation:fadeUp .8s .4s ease forwards;
+  }
+  .btn-main {
+    padding:16px 44px;
+    background:var(--green); color:#06090f;
+    font-family:'Space Mono',monospace; font-size:12px;
+    letter-spacing:2px; text-transform:uppercase; font-weight:700;
+    border:none; border-radius:3px; cursor:pointer;
+    text-decoration:none; display:inline-block;
+    transition:box-shadow .2s, transform .2s;
+  }
+  .btn-main:hover { box-shadow:0 0 40px rgba(0,255,136,.55), 0 0 80px rgba(0,255,136,.2); transform:translateY(-2px); }
+  .btn-outline {
+    padding:16px 36px;
+    background:transparent; color:var(--text);
+    font-family:'Space Mono',monospace; font-size:12px;
+    letter-spacing:2px; text-transform:uppercase;
+    border:1px solid var(--border); border-radius:3px; cursor:pointer;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    transition:border-color .2s, color .2s;
+  }
+  .btn-outline:hover { border-color:var(--blue); color:var(--blue); }
+
+  /* Floating stats */
+  .hero-stats {
+    position:absolute; right:5%; bottom:10%;
+    display:flex; flex-direction:column; gap:28px;
+    opacity:0; animation:fadeUp .8s .6s ease forwards;
+  }
+  .stat { text-align:right; }
+  .stat-num {
+    font-family:'Bebas Neue',sans-serif; font-size:52px; line-height:1;
+    color:var(--blue); text-shadow:0 0 30px rgba(0,207,255,.5);
+  }
+  .stat-label {
+    font-family:'Space Mono',monospace; font-size:10px;
+    letter-spacing:2px; color:var(--muted); text-transform:uppercase;
+  }
+
+  /* scroll indicator */
+  .scroll-ind {
+    position:absolute; bottom:40px; left:5%;
+    display:flex; align-items:center; gap:12px;
+    font-family:'Space Mono',monospace; font-size:10px;
+    letter-spacing:2px; color:var(--muted); text-transform:uppercase;
+    opacity:0; animation:fadeUp .8s .7s ease forwards;
+  }
+  .scroll-line { width:1px; height:56px; background:linear-gradient(to bottom,var(--muted),transparent); animation:blink 2s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:.3} 50%{opacity:1} }
+
+  /* ── SECTION COMMON ── */
+  section { position:relative; z-index:1; }
+  .sec-wrap { padding:120px 5%; }
+  .sec-tag {
+    font-family:'Space Mono',monospace;
+    font-size:10px; letter-spacing:4px; text-transform:uppercase;
+    color:var(--pink); margin-bottom:20px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .sec-tag::before { content:'//'; opacity:.5; }
+  .sec-body { color:var(--muted); font-weight:300; font-size:16px; line-height:1.9; }
+  .sec-body strong { color:var(--text); font-weight:400; }
+  .divider { height:1px; background:var(--border); margin:0 5%; }
+
+  /* ── WHAT IS ── */
+  .what-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;
+  }
+  .quote-card {
+    border-left:3px solid var(--pink);
+    padding:32px 36px;
+    background:rgba(255,61,127,.04);
+    border-radius:0 4px 4px 0;
+    margin-top:36px;
+  }
+  .quote-card q {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(28px,3vw,40px); line-height:1.25;
+    color:var(--text); quotes:none;
+  }
+  .quote-auth {
+    margin-top:16px;
+    font-family:'Space Mono',monospace;
+    font-size:11px; color:var(--pink); letter-spacing:2px; text-transform:uppercase;
+  }
+
+  /* Code window mockup */
+  .code-win {
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px; overflow:hidden;
+    box-shadow:0 0 60px rgba(0,0,0,.5), 0 0 120px rgba(0,207,255,.05);
+  }
+  .code-win-bar {
+    display:flex; align-items:center; gap:8px;
+    padding:14px 20px;
+    background:rgba(255,255,255,.03);
+    border-bottom:1px solid var(--border);
+  }
+  .dot { width:12px;height:12px;border-radius:50%; }
+  .dot.r{background:#ff5f57} .dot.y{background:#febc2e} .dot.g{background:#28c840}
+  .code-filename {
+    font-family:'Space Mono',monospace; font-size:11px;
+    color:var(--muted); margin-left:8px; letter-spacing:1px;
+  }
+  .code-body { padding:28px 28px; line-height:2; font-family:'Space Mono',monospace; font-size:13px; }
+  .ck { color:#c792ea }   /* keyword */
+  .cs { color:#c3e88d }   /* string */
+  .cc { color:var(--muted) } /* comment */
+  .cf { color:var(--blue) }  /* function */
+  .cn { color:var(--green) } /* number / name */
+
+  /* ── HOW IT WORKS ── */
+  .steps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+  .step-card {
+    background:var(--card);
+    border:1px solid var(--border);
+    padding:48px 36px;
+    position:relative; overflow:hidden;
+    transition:border-color .3s, transform .3s;
+  }
+  .step-card:hover { border-color:rgba(0,207,255,.35); transform:translateY(-6px); }
+  .step-card::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(circle at 30% 30%, rgba(0,207,255,.04), transparent 60%);
+    pointer-events:none;
+  }
+  .step-num {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:80px; line-height:1;
+    color:rgba(255,255,255,.04);
+    position:absolute; top:16px; right:24px;
+  }
+  .step-icon {
+    font-size:36px; margin-bottom:24px;
+    display:inline-block;
+  }
+  .step-name {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:32px; letter-spacing:1px;
+    margin-bottom:14px; color:var(--text);
+  }
+  .step-desc { color:var(--muted); font-weight:300; font-size:15px; line-height:1.8; }
+
+  /* ── FEATURES ── */
+  .features-intro { max-width:640px; margin-bottom:64px; }
+  .features-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; }
+  .feat-card {
+    background:var(--card);
+    border:1px solid var(--border);
+    padding:40px 36px;
+    transition:border-color .3s, transform .3s;
+    position:relative; overflow:hidden;
+  }
+  .feat-card:hover { border-color:rgba(0,255,136,.25); transform:translateY(-4px); }
+  .feat-card::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:2px;
+    background:linear-gradient(to right,var(--green),var(--blue));
+    transform:scaleX(0); transform-origin:left;
+    transition:transform .4s ease;
+  }
+  .feat-card:hover::after { transform:scaleX(1); }
+  .feat-badge {
+    display:inline-block;
+    font-family:'Space Mono',monospace; font-size:10px;
+    letter-spacing:2px; text-transform:uppercase;
+    padding:6px 14px; border-radius:2px;
+    border:1px solid; margin-bottom:24px;
+  }
+  .feat-badge.green { color:var(--green); border-color:rgba(0,255,136,.3); background:rgba(0,255,136,.06); }
+  .feat-badge.blue  { color:var(--blue);  border-color:rgba(0,207,255,.3); background:rgba(0,207,255,.06); }
+  .feat-badge.pink  { color:var(--pink);  border-color:rgba(255,61,127,.3); background:rgba(255,61,127,.06); }
+  .feat-badge.yellow{ color:var(--yellow);border-color:rgba(255,230,0,.3);  background:rgba(255,230,0,.06); }
+  .feat-title { font-family:'Bebas Neue',sans-serif; font-size:30px; margin-bottom:14px; letter-spacing:1px; }
+  .feat-body  { color:var(--muted); font-size:15px; line-height:1.8; font-weight:300; }
+
+  /* ── COMPARE ── */
+  .compare-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
+  .cmp-card {
+    padding:52px 44px;
+    background:var(--card);
+    border:1px solid var(--border);
+  }
+  .cmp-card.vibe { border-color:rgba(0,255,136,.25); background:rgba(0,255,136,.03); }
+  .cmp-label {
+    font-family:'Space Mono',monospace; font-size:11px;
+    letter-spacing:3px; text-transform:uppercase;
+    margin-bottom:32px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .cmp-label .dot2 { width:8px;height:8px;border-radius:50%; background:currentColor; }
+  .cmp-label.old { color:var(--muted); }
+  .cmp-label.new { color:var(--green); }
+  .cmp-items { display:flex; flex-direction:column; gap:18px; }
+  .cmp-item { display:flex; gap:14px; align-items:flex-start; font-size:15px; color:var(--muted); font-weight:300; line-height:1.6; }
+  .cmp-item .icon { font-size:18px; flex-shrink:0; margin-top:1px; }
+  .cmp-item.good { color:var(--text); }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding:120px 5%;
+    text-align:center;
+    position:relative; overflow:hidden;
+  }
+  .cta-section::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse at center, rgba(0,255,136,.06) 0%, transparent 65%);
+    pointer-events:none;
+  }
+  .cta-title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(56px,8vw,110px); line-height:.95;
+    margin-bottom:28px;
+  }
+  .cta-sub { color:var(--muted); font-size:18px; font-weight:300; max-width:480px; margin:0 auto 48px; line-height:1.7; }
+  .cta-actions { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top:1px solid var(--border);
+    padding:40px 5%;
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:16px;
+    position:relative; z-index:1;
+  }
+  .footer-logo { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:3px; color:var(--green); }
+  .footer-logo span { color:var(--blue); }
+  .footer-copy { font-family:'Space Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(28px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .reveal {
+    opacity:0; transform:translateY(32px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+  .reveal-delay-1 { transition-delay:.1s; }
+  .reveal-delay-2 { transition-delay:.2s; }
+  .reveal-delay-3 { transition-delay:.3s; }
+  .reveal-delay-4 { transition-delay:.4s; }
+  .reveal-delay-5 { transition-delay:.5s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width:900px) {
+    nav { padding:18px 5%; }
+    .nav-links { display:none; }
+    .hero { padding:100px 5% 80px; }
+    .hero-stats { position:static; flex-direction:row; gap:32px; margin-top:48px; }
+    .stat { text-align:left; }
+    .what-grid { grid-template-columns:1fr; gap:48px; }
+    .steps-grid { grid-template-columns:1fr; }
+    .features-grid { grid-template-columns:1fr; }
+    .compare-grid { grid-template-columns:1fr; }
+    footer { flex-direction:column; align-items:flex-start; gap:12px; }
+  }
+  @media (max-width:480px) {
+    .hero-title { font-size:clamp(60px,18vw,100px); }
+    .sec-wrap { padding:80px 5%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">VIBE<span>.</span>CODE</div>
+  <ul class="nav-links">
+    <li><a href="#what">개념</a></li>
+    <li><a href="#how">방법</a></li>
+    <li><a href="#features">특징</a></li>
+    <li><a href="#compare">비교</a></li>
+  </ul>
+  <a href="#cta" class="nav-btn">시작하기</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">새로운 개발 패러다임</p>
+  <h1 class="hero-title" id="heroTitle">
+    <span class="line1">느낌으로</span><br>
+    <span class="g line2">코딩</span><span class="b line3">하라</span>
+  </h1>
+  <p class="hero-desc">
+    <strong>바이브 코딩(Vibe Coding)</strong>은 AI와 함께 흐름을 타며 코드를 만들어나가는 방식입니다. 문법보다 <strong>의도</strong>에 집중하고, 완벽함보다 <strong>속도</strong>를 추구합니다.
+  </p>
+  <div class="hero-actions">
+    <a href="#how" class="btn-main">어떻게 하나요?</a>
+    <a href="#compare" class="btn-outline">기존 방식과 비교 →</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">10×</div><div class="stat-label">개발 속도</div></div>
+    <div class="stat"><div class="stat-num">∞</div><div class="stat-label">창의성</div></div>
+    <div class="stat"><div class="stat-num">0</div><div class="stat-label">막히는 순간</div></div>
+  </div>
+  <div class="scroll-ind">
+    <div class="scroll-line"></div>
+    스크롤
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHAT IS -->
+<section id="what" class="sec-wrap">
+  <div class="what-grid">
+    <div class="reveal">
+      <p class="sec-tag">바이브 코딩이란</p>
+      <h2 class="sec-title"><span class="title-line"><span class="title-inner">코딩이</span></span><span class="title-line"><span class="title-inner">즐거워지는</span></span><span class="title-line"><span class="title-inner">순간</span></span></h2>
+      <p class="sec-body">
+        바이브 코딩은 <strong>Andrej Karpathy</strong>가 2025년 처음 제안한 개념으로, AI 어시스턴트에게 원하는 것을 자연어로 말하고, AI가 코드를 생성하면 개발자는 그것을 실행·확인·조율하는 방식입니다.
+      </p>
+      <p class="sec-body" style="margin-top:16px">
+        전통적인 코딩처럼 문법을 외우거나 스택 오버플로우를 뒤질 필요 없이, <strong>아이디어의 흐름(vibe)을 그대로 코드로 옮기는</strong> 새로운 개발 경험입니다.
+      </p>
+      <div class="quote-card">
+        <q>완전히 AI에게 몸을 맡기고, 존재 자체를 잊어버려라. 에러조차 그냥 붙여넣기 하면 된다.</q>
+        <p class="quote-auth">— Andrej Karpathy, 2025</p>
+      </div>
+    </div>
+
+    <!-- Code window -->
+    <div class="reveal reveal-delay-2">
+      <div class="code-win">
+        <div class="code-win-bar">
+          <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+          <span class="code-filename">vibe.js</span>
+        </div>
+        <div class="code-body">
+          <div><span class="cc">// 예전 방식</span></div>
+          <div><span class="ck">function</span> <span class="cf">fetchData</span>() {</div>
+          <div>&nbsp;&nbsp;<span class="ck">return</span> <span class="cn">fetch</span>(<span class="cs">'/api/data'</span>)</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;.<span class="cf">then</span>(res => res.<span class="cf">json</span>())</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;.<span class="cf">catch</span>(err => <span class="cn">console</span>.<span class="cf">error</span>(err))</div>
+          <div>}</div>
+          <br>
+          <div><span class="cc">// 바이브 코딩 방식 💚</span></div>
+          <div><span class="cc">// "API에서 데이터 가져와서 에러 처리도 해줘"</span></div>
+          <div><span class="ck">const</span> <span class="cn">data</span> = <span class="ck">await</span> <span class="cf">ai</span>.<span class="cf">do</span>(<span class="cs">`</span></div>
+          <div><span class="cs">&nbsp;&nbsp;/api/data 에서 데이터 fetch,</span></div>
+          <div><span class="cs">&nbsp;&nbsp;로딩·에러 상태 처리 포함</span></div>
+          <div><span class="cs">`</span>)</div>
+          <br>
+          <div><span class="cc">// ✓ 완성. 다음 기능으로 이동.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="sec-wrap">
+  <div class="reveal" style="max-width:600px;margin-bottom:64px">
+    <p class="sec-tag">워크플로우</p>
+    <h2 class="sec-title"><span class="title-line"><span class="title-inner">딱 세 단계</span></span></h2>
+    <p class="sec-body">바이브 코딩은 간단합니다. 말하고, 확인하고, 반복하세요.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card reveal reveal-delay-1">
+      <div class="step-num">01</div>
+      <div class="step-icon">🎯</div>
+      <h3 class="step-name">원하는 것을 말한다</h3>
+      <p class="step-desc">코드 문법이 아닌 <strong style="color:var(--text)">자연어</strong>로 의도를 전달합니다. "사용자 목록을 카드로 보여줘"처럼 결과물을 묘사하세요.</p>
+    </div>
+    <div class="step-card reveal reveal-delay-2">
+      <div class="step-num">02</div>
+      <div class="step-icon">⚡</div>
+      <h3 class="step-name">AI가 코드를 만든다</h3>
+      <p class="step-desc">AI가 즉시 <strong style="color:var(--text)">동작하는 코드</strong>를 생성합니다. 에러가 나도 괜찮아요. 그냥 에러 메시지를 다시 AI에게 넘기면 됩니다.</p>
+    </div>
+    <div class="step-card reveal reveal-delay-3">
+      <div class="step-num">03</div>
+      <div class="step-icon">🔄</div>
+      <h3 class="step-name">흐름을 타며 반복한다</h3>
+      <p class="step-desc">결과를 보고 <strong style="color:var(--text)">즉각 피드백</strong>을 줍니다. "색상 바꿔줘", "여기에 애니메이션 추가해줘" — 이게 바이브입니다.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<section id="features" class="sec-wrap">
+  <div class="features-intro reveal">
+    <p class="sec-tag">왜 바이브 코딩인가</p>
+    <h2 class="sec-title"><span class="title-line"><span class="title-inner">개발의</span></span><span class="title-line"><span class="title-inner">새로운 기준</span></span></h2>
+  </div>
+  <div class="features-grid">
+    <div class="feat-card reveal reveal-delay-1">
+      <span class="feat-badge green">속도</span>
+      <h3 class="feat-title">아이디어에서 프로토타입까지 수분</h3>
+      <p class="feat-body">기획부터 동작하는 코드까지, 기존 방식의 10배 빠른 속도로 제품을 만들 수 있습니다. 주말 해커톤에서 전체 앱을 완성하는 게 현실이 됩니다.</p>
+    </div>
+    <div class="feat-card reveal reveal-delay-2">
+      <span class="feat-badge blue">진입장벽</span>
+      <h3 class="feat-title">코딩 몰라도 만든다</h3>
+      <p class="feat-body">디자이너, 기획자, 마케터도 자신의 아이디어를 직접 코드로 구현할 수 있습니다. 프로그래밍 지식의 장벽이 대폭 낮아집니다.</p>
+    </div>
+    <div class="feat-card reveal reveal-delay-3">
+      <span class="feat-badge pink">창의성</span>
+      <h3 class="feat-title">막히지 않는 플로우 상태</h3>
+      <p class="feat-body">구현 방법을 고민하느라 창의적 흐름이 끊기지 않습니다. 아이디어가 떠오르는 속도로 코드가 만들어집니다.</p>
+    </div>
+    <div class="feat-card reveal reveal-delay-4">
+      <span class="feat-badge yellow">학습</span>
+      <h3 class="feat-title">만들면서 배우는 코드</h3>
+      <p class="feat-body">AI가 생성한 코드를 읽고, 질문하고, 수정하면서 자연스럽게 개발 지식이 쌓입니다. 실전 프로젝트가 최고의 교재입니다.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPARE -->
+<section id="compare" class="sec-wrap">
+  <div class="reveal" style="max-width:600px;margin-bottom:64px">
+    <p class="sec-tag">기존 vs 바이브 코딩</p>
+    <h2 class="sec-title"><span class="title-line"><span class="title-inner">무엇이</span></span><span class="title-line"><span class="title-inner">달라지나</span></span></h2>
+  </div>
+  <div class="compare-grid">
+    <div class="cmp-card reveal reveal-delay-1">
+      <p class="cmp-label old"><span class="dot2"></span> 기존 개발 방식</p>
+      <div class="cmp-items">
+        <div class="cmp-item"><span class="icon">⏳</span>문법 에러 해결에 몇 시간 소비</div>
+        <div class="cmp-item"><span class="icon">📚</span>문서와 스택오버플로우를 뒤져야 함</div>
+        <div class="cmp-item"><span class="icon">🧠</span>구현 방법에 대한 인지 부하가 큼</div>
+        <div class="cmp-item"><span class="icon">😓</span>환경 설정과 보일러플레이트에 지침</div>
+        <div class="cmp-item"><span class="icon">⛔</span>비개발자는 시작조차 어려움</div>
+      </div>
+    </div>
+    <div class="cmp-card vibe reveal reveal-delay-2">
+      <p class="cmp-label new"><span class="dot2"></span> 바이브 코딩</p>
+      <div class="cmp-items">
+        <div class="cmp-item good"><span class="icon">⚡</span>에러도 AI에게 붙여넣기 → 즉시 해결</div>
+        <div class="cmp-item good"><span class="icon">💬</span>자연어로 원하는 것을 설명하면 끝</div>
+        <div class="cmp-item good"><span class="icon">🎯</span>무엇을 만들지에만 집중</div>
+        <div class="cmp-item good"><span class="icon">🚀</span>말 한마디로 프로젝트 세팅 완료</div>
+        <div class="cmp-item good"><span class="icon">✅</span>누구든 아이디어만 있으면 시작 가능</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<section id="cta" class="cta-section">
+  <p class="sec-tag reveal" style="justify-content:center">지금 시작하세요</p>
+  <h2 class="cta-title reveal reveal-delay-1">
+    당신의 아이디어를<br>
+    <span class="glitch-wrap cta-green-flicker" data-text="지금 바로" style="color:var(--green)">지금 바로</span> 만드세요
+  </h2>
+  <p class="cta-sub reveal reveal-delay-2">코딩을 몰라도 됩니다. 만들고 싶은 것만 있으면 충분합니다.</p>
+  <div class="cta-actions reveal reveal-delay-3">
+    <a href="#" class="btn-main">무료로 시작하기</a>
+    <a href="#what" class="btn-outline">더 알아보기 →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">VIBE<span>.</span>CODE</div>
+  <p class="footer-copy">© 2025 VibeCoding — Feel the flow, ship the dream</p>
+</footer>
+
+<script>
+  // ── Hero title character split animation ──
+  function splitChars(el, baseDelay) {
+    const text = el.textContent;
+    el.innerHTML = '';
+    [...text].forEach((ch, i) => {
+      const span = document.createElement('span');
+      span.className = ch === ' ' ? 'char-space' : 'char';
+      span.textContent = ch === ' ' ? '\u00A0' : ch;
+      if (ch !== ' ') span.style.animationDelay = (baseDelay + i * 0.045) + 's';
+      el.appendChild(span);
+    });
+  }
+
+  const heroTitle = document.getElementById('heroTitle');
+  if (heroTitle) {
+    const line1 = heroTitle.querySelector('.line1');
+    const line2 = heroTitle.querySelector('.line2');
+    const line3 = heroTitle.querySelector('.line3');
+    // preserve color classes
+    const colorG = 'g', colorB = 'b';
+    splitChars(line1, 0.1);
+    splitChars(line2, 0.5);
+    splitChars(line3, 0.8);
+    // re-apply color class to each char in line2/line3
+    line2.querySelectorAll('.char,.char-space').forEach(c => c.classList.add(colorG));
+    line3.querySelectorAll('.char,.char-space').forEach(c => c.classList.add(colorB));
+  }
+
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Smooth nav links ──
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior:'smooth' }); }
+    });
+  });
+
+  // ── Stat counter animation ──
+  function animateCount(el, target, suffix='') {
+    let start = 0;
+    const dur = 1400;
+    const step = timestamp => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / dur, 1);
+      const val = Math.floor(progress * target);
+      el.textContent = val + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  const statObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const nums = e.target.querySelectorAll('.stat-num');
+        nums.forEach(n => {
+          const txt = n.textContent.trim();
+          if (txt === '10×') { animateCount(n, 10, '×'); }
+        });
+        statObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  const statsEl = document.querySelector('.hero-stats');
+  if (statsEl) statObs.observe(statsEl);
+</script>
+</body>
+</html>
