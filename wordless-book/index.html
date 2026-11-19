@@ -61,7 +61,7 @@
   #musicBtn.playing{background:#FFF3D9;border-color:#E9C77A;animation:breathe 2.2s ease-in-out infinite}
   @keyframes breathe{0%,100%{box-shadow:0 0 0 0 rgba(245,192,32,.45)}50%{box-shadow:0 0 0 7px rgba(245,192,32,0)}}
 
-  #chips{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-top:2px}
+  #chips{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;margin-top:2px}
   .chip{
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
     min-height:54px;padding:4px 0 4px;border:0;background:transparent;border-radius:14px;
@@ -75,6 +75,8 @@
     transition:transform .18s ease, box-shadow .18s ease;
   }
   .chip .lbl{font-size:12.5px;font-weight:900;letter-spacing:-.5px}
+  .chip .dot.winddot{display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#EDF9FF,#C3E7F8)}
+  .chip .dot.winddot svg{width:15px;height:15px;fill:none;stroke:#3E86AC;stroke-width:2.3;stroke-linecap:round}
   .chip.active{background:#fff;box-shadow:0 2px 10px rgba(120,90,40,.13);color:#3A2E1E}
   .chip.active .dot{transform:scale(1.12);box-shadow:0 0 0 2.5px #fff,0 0 0 4.5px var(--accent,#C9A96A)}
   .chip:active .dot{transform:scale(.94)}
@@ -190,6 +192,28 @@
   .verse::after{
     content:"";position:absolute;left:1px;right:1px;bottom:1px;height:26px;border-radius:0 0 17px 17px;
     background:linear-gradient(rgba(255,252,244,0),rgba(255,252,244,.96));pointer-events:none;
+  }
+
+  /* ---------- wind (바람) ---------- */
+  .pointline{
+    margin:0 0 9px;padding:9px 12px 10px;border-radius:16px;
+    background:linear-gradient(135deg,#F2FBFF,#DEF1FC);
+    border:1.5px solid #C6E4F4;
+    font-size:clamp(17.5px,4.9vw,20px);line-height:1.4;font-weight:900;
+    color:#1B5F7E;letter-spacing:-.6px;word-break:keep-all;
+  }
+  .pointline b{color:#BC5308;font-weight:900}
+  .cardbody h2.h2long{font-size:clamp(22px,6.2vw,25.5px)}
+  @keyframes wSpin{to{transform:rotate(360deg)}}
+  @keyframes wSway{from{transform:rotate(-2.6deg)}to{transform:rotate(2.6deg)}}
+  .windblades{transform-box:fill-box;transform-origin:50% 50%;animation:wSpin 2.8s linear infinite}
+  .windcrown{transform-box:fill-box;transform-origin:50% 100%;animation:wSway 4.4s ease-in-out infinite alternate}
+  .windleaf{animation:wSway 3.4s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 50%}
+  @media (max-height:800px){
+    .pointline{font-size:clamp(16px,4.5vw,18px);padding:8px 11px 9px;margin-bottom:7px}
+  }
+  @media (max-height:700px){
+    .page[data-page="wind"] .desc{-webkit-line-clamp:2}
   }
 
   /* ---------- prayer ---------- */
@@ -443,7 +467,8 @@
       <div class="brand"><span class="bk">📖</span><span>글없는책</span></div>
       <button id="musicBtn" aria-label="복음찬송 재생 또는 멈추기">🎵</button>
     </div>
-    <div id="chips" role="tablist" aria-label="색깔별 이야기 바로 보기">
+    <div id="chips" role="tablist" aria-label="이야기 순서대로 바로 보기">
+      <button class="chip" data-go="wind" role="tab" style="--accent:#6FB6DC"><span class="dot winddot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h11a3 3 0 1 0-3-3"/><path d="M3 13h13a3 3 0 1 1-3 3"/><path d="M3 18h7"/></svg></span><span class="lbl">바람</span></button>
       <button class="chip" data-go="gold" role="tab" style="--accent:#F5C020"><span class="dot" style="background:linear-gradient(160deg,#FFDA5A,#EFAE05)"></span><span class="lbl">황금색</span></button>
       <button class="chip" data-go="black" role="tab" style="--accent:#2D3142"><span class="dot" style="background:linear-gradient(160deg,#4A5162,#20232E)"></span><span class="lbl">검정색</span></button>
       <button class="chip" data-go="red" role="tab" style="--accent:#D93A3A"><span class="dot" style="background:linear-gradient(160deg,#F1655C,#C62B2B)"></span><span class="lbl">빨강색</span></button>
@@ -522,7 +547,113 @@
         <p class="lead">다섯 가지 색으로 만나는 하나님의 사랑 이야기</p>
         <button id="startBtn" class="cta">시작하기</button>
         <button id="coverMusic" class="musiclink">🎵 복음찬송 듣기</button>
-        <p class="cover-note">위의 색깔을 눌러 원하는 이야기부터 볼 수도 있어요</p>
+        <p class="cover-note">위의 이야기를 눌러 원하는 곳부터 볼 수도 있어요</p>
+      </div>
+    </section>
+
+    <!-- ================= 바람 (보이지 않는 하나님) ================= -->
+    <section class="page story" data-page="wind" aria-label="바람 - 보이지 않지만 살아계신 하나님">
+      <div class="card" style="--deep:#2C6E8E;--tint:#EAF6FD">
+        <div class="artwrap" style="background:#EAF6FD">
+          <svg class="art" viewBox="0 0 320 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="바람에 나뭇잎이 흔들리고 바람개비가 힘차게 도는 맑은 언덕">
+            <defs>
+              <linearGradient id="wSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#E4F6FF"/><stop offset=".52" stop-color="#F5FCFF"/><stop offset="1" stop-color="#FFF8E4"/>
+              </linearGradient>
+              <radialGradient id="wSun" cx=".5" cy=".5" r=".5">
+                <stop offset="0" stop-color="#FFF9D8"/><stop offset=".5" stop-color="#FFE9A6" stop-opacity=".62"/><stop offset="1" stop-color="#FFE9A6" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="wHillA" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#BCE8A3"/><stop offset="1" stop-color="#86D07A"/>
+              </linearGradient>
+              <linearGradient id="wHillB" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#96D786"/><stop offset="1" stop-color="#5FB463"/>
+              </linearGradient>
+              <linearGradient id="wTrunk" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#B8895B"/><stop offset="1" stop-color="#8B5E37"/>
+              </linearGradient>
+              <path id="wLeaf" d="M0 0 C 5 -6 13 -5 16 1 C 11 7 3 7 0 0 Z"/>
+            </defs>
+            <rect width="320" height="300" fill="url(#wSky)"/>
+            <circle cx="266" cy="78" r="58" fill="url(#wSun)"/>
+            <circle cx="266" cy="78" r="18" fill="#FFDD77"/>
+            <!-- 구름 -->
+            <g fill="#FFFFFF" opacity=".92">
+              <ellipse cx="44" cy="88" rx="30" ry="12"/><ellipse cx="60" cy="79" rx="18" ry="10"/>
+              <ellipse cx="200" cy="62" rx="24" ry="10"/><ellipse cx="212" cy="54" rx="14" ry="8"/>
+            </g>
+            <!-- 바람 -->
+            <g fill="none" stroke="#9CD2EC" stroke-width="5" stroke-linecap="round" opacity=".85">
+              <path d="M4 114 C 38 100 64 128 98 112"/>
+              <path d="M20 152 C 56 140 82 166 120 150"/>
+              <path d="M170 92 C 196 82 216 100 244 90"/>
+            </g>
+            <g fill="none" stroke="#BEE3F4" stroke-width="4" stroke-linecap="round">
+              <path d="M146 76 c 10 -8 24 -3 24 7 c 0 7 -9 9 -12 4"/>
+              <path d="M252 130 c -9 -6 -20 -2 -20 6 c 0 6 8 8 11 4"/>
+            </g>
+            <!-- 언덕 -->
+            <path d="M0 300 L0 232 C 56 208 118 236 176 224 C 234 212 280 230 320 218 L320 300 Z" fill="url(#wHillA)"/>
+            <path d="M0 300 L0 262 C 64 246 132 272 198 260 C 252 250 288 264 320 256 L320 300 Z" fill="url(#wHillB)"/>
+            <!-- 나무 -->
+            <path d="M78 278 C 82 246 76 214 82 184 L96 184 C 102 214 96 246 100 278 Z" fill="url(#wTrunk)"/>
+            <path d="M84 210 C 70 200 62 190 56 178" stroke="#8B5E37" stroke-width="7" fill="none" stroke-linecap="round"/>
+            <path d="M92 198 C 106 188 114 178 120 166" stroke="#8B5E37" stroke-width="6.5" fill="none" stroke-linecap="round"/>
+            <g class="windcrown">
+              <circle cx="86" cy="148" r="44" fill="#79C874"/>
+              <circle cx="46" cy="160" r="26" fill="#5FB667"/>
+              <circle cx="124" cy="158" r="28" fill="#66BE6C"/>
+              <circle cx="90" cy="116" r="26" fill="#8FDB84"/>
+              <circle cx="58" cy="130" r="20" fill="#8FDB84"/>
+              <circle cx="118" cy="130" r="19" fill="#8FDB84" opacity=".92"/>
+            </g>
+            <!-- 날아가는 나뭇잎 -->
+            <g class="windleaf">
+              <use href="#wLeaf" fill="#6FC36E" transform="translate(146 104) rotate(18)"/>
+              <use href="#wLeaf" fill="#8FDB84" transform="translate(172 132) rotate(-14) scale(.9)"/>
+              <use href="#wLeaf" fill="#F5C020" transform="translate(196 96) rotate(30) scale(.8)"/>
+              <use href="#wLeaf" fill="#6FC36E" transform="translate(206 150) rotate(-24)"/>
+              <use href="#wLeaf" fill="#A7E39A" transform="translate(158 168) rotate(8) scale(.75)"/>
+              <use href="#wLeaf" fill="#8FDB84" transform="translate(224 118) rotate(36) scale(.7)"/>
+            </g>
+            <!-- 바람개비 -->
+            <path d="M246 274 L246 192" stroke="#C08B4F" stroke-width="5" stroke-linecap="round"/>
+            <g class="windblades">
+              <path d="M246 186 L246 154 C 262 156 274 168 274 184 Z" fill="#F5C020"/>
+              <path d="M246 186 L278 186 C 276 202 264 214 248 214 Z" fill="#D9534F"/>
+              <path d="M246 186 L246 218 C 230 216 218 204 218 188 Z" fill="#4C93D9"/>
+              <path d="M246 186 L214 186 C 216 170 228 158 244 158 Z" fill="#4CAE6A"/>
+              <circle cx="246" cy="186" r="6.5" fill="#FFF8E2" stroke="#C08B4F" stroke-width="2.4"/>
+            </g>
+            <!-- 풀과 들꽃 -->
+            <g stroke="#4EA65A" stroke-width="3" stroke-linecap="round" fill="none" opacity=".75">
+              <path d="M18 288 c 2 -8 6 -12 9 -15"/><path d="M30 290 c 0 -9 3 -13 6 -17"/>
+              <path d="M296 284 c -2 -8 -5 -12 -8 -15"/><path d="M284 286 c 0 -8 -2 -12 -5 -16"/>
+            </g>
+            <g>
+              <circle cx="40" cy="276" r="3.6" fill="#FFFFFF"/><circle cx="40" cy="276" r="1.6" fill="#F5C020"/>
+              <circle cx="272" cy="262" r="3.4" fill="#FFFFFF"/><circle cx="272" cy="262" r="1.5" fill="#F5C020"/>
+              <circle cx="140" cy="290" r="3.2" fill="#FFF3B0"/>
+            </g>
+          </svg>
+          <span class="kicker">🌬️ 바람</span>
+        </div>
+        <div class="cardbody">
+          <h2>보이지 않아도 있어요</h2>
+          <p class="desc">바람은 눈에 보이지 않지만 나뭇잎이 흔들리는 걸 보면 바람이 있는 걸 알 수 있어요.</p>
+          <p class="pointline">하나님도 눈에 보이지 않지만<br><b>지금 살아계셔요!</b></p>
+          <div class="verse" role="button" tabindex="0"
+               data-vkey="wind" data-vref="히브리서 11장 6절"
+               data-vhint="나뭇잎이 흔들리면 보이지 않는 바람을 알 수 있듯이, 하나님도 눈에 보이지 않지만 지금 살아계세요."
+               data-vtext="믿음이 없이는 기쁘시게 못하나니 하나님께 나아가는 자는 반드시 그가 계신 것과 또한 그가 자기를 찾는 자들에게 상 주시는 이심을 믿어야 할지니라"
+               aria-label="히브리서 11장 6절 성경구절 크게 보기">
+            <div class="vhead">
+              <span class="vref">히브리서 11장 6절</span>
+              <span class="vzoom">🔍 크게 보기</span>
+            </div>
+            <div class="vtext">믿음이 없이는 기쁘시게 못하나니 하나님께 나아가는 자는 반드시 그가 계신 것과 또한 그가 자기를 찾는 자들에게 상 주시는 이심을 믿어야 할지니라</div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -601,8 +732,8 @@
           <span class="kicker">1 · 황금색</span>
         </div>
         <div class="cardbody">
-          <h2>하나님이 너를 사랑해요</h2>
-          <p class="desc">하나님이 너를 사랑하시고 아름다운 천국을 준비하셨어요.</p>
+          <h2 class="h2long">그 살아계신 하나님은<br>너를 아주 많이 사랑하셔요!</h2>
+          <p class="desc">하나님이 너를 위해 아름다운 천국을 준비하셨어요.</p>
           <div class="verse" role="button" tabindex="0"
                data-vkey="gold" data-vref="요한복음 3장 16절"
                data-vhint="황금색은 가장 좋은 것, 하나님의 하늘나라를 보여 줘요."
@@ -1051,7 +1182,7 @@
 (function () {
   'use strict';
 
-  var order = ['cover','gold','black','red','white','green','prayer','growth'];
+  var order = ['cover','wind','gold','black','red','white','green','prayer','growth'];
   var stage = document.getElementById('stage');
   var pages = {};
   Array.prototype.forEach.call(document.querySelectorAll('.page'), function (p) {
@@ -1109,7 +1240,7 @@
     if (i >= 0 && i < order.length) show(order[i]);
   }
 
-  document.getElementById('startBtn').addEventListener('click', function () { show('gold'); });
+  document.getElementById('startBtn').addEventListener('click', function () { show('wind'); });
   document.getElementById('next').addEventListener('click', function () { step(1); });
   document.getElementById('prev').addEventListener('click', function () { step(-1); });
   document.getElementById('againBtn').addEventListener('click', function () { show('cover'); });
@@ -1152,6 +1283,7 @@
   var lastFocus = null, savedScroll = 0;
 
   var THEME = {
+    wind:   { bg:'#0E2A38', fg:'#F2FBFF', accent:'#8FD2EF', tag:'🌬️ 바람' },
     gold:   { bg:'#3B2A06', fg:'#FFF7DF', accent:'#FFCB33', tag:'1 · 황금색' },
     black:  { bg:'#0E1322', fg:'#F4F7FF', accent:'#AFC4EE', tag:'2 · 검정색' },
     red:    { bg:'#3C0F13', fg:'#FFF1EC', accent:'#FF9A80', tag:'3 · 빨강색' },
