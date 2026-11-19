@@ -753,60 +753,210 @@
     <section class="page story" data-page="black" aria-label="검정색 - 죄">
       <div class="card" style="--deep:#2C3243;--tint:#EEF0F5">
         <div class="artwrap">
-          <svg class="art" viewBox="0 0 320 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="어두운 밤, 높이 솟은 검은 벽 앞에 서 있는 아이와 벽 틈으로 새어 나오는 따뜻한 빛">
+          <svg class="art" viewBox="0 0 320 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="어두운 하늘 아래, 왼쪽 절벽 너머로 따뜻한 빛과 하트가 빛나고 오른쪽 언덕에 선 아이가 그 빛을 향해 손을 내밀지만 두 절벽 사이의 깊고 캄캄한 골짜기를 건널 수 없어 갈라져 있는 모습">
             <defs>
               <linearGradient id="bSky" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#414A66"/><stop offset=".55" stop-color="#28304A"/><stop offset="1" stop-color="#141A2A"/>
+                <stop offset="0" stop-color="#3C4770"/>
+                <stop offset=".55" stop-color="#232C4A"/>
+                <stop offset="1" stop-color="#0E1322"/>
               </linearGradient>
-              <radialGradient id="bLight" cx=".5" cy=".5" r=".5">
-                <stop offset="0" stop-color="#FFDD9C" stop-opacity=".95"/><stop offset=".55" stop-color="#FFC97A" stop-opacity=".45"/><stop offset="1" stop-color="#FFC97A" stop-opacity="0"/>
+              <linearGradient id="bRightShade" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#080C16" stop-opacity="0"/>
+                <stop offset="1" stop-color="#04060C" stop-opacity=".4"/>
+              </linearGradient>
+              <radialGradient id="bGlow" cx=".5" cy=".5" r=".5">
+                <stop offset="0" stop-color="#FFF0CA" stop-opacity=".95"/>
+                <stop offset=".36" stop-color="#FFD790" stop-opacity=".5"/>
+                <stop offset=".7" stop-color="#F0A648" stop-opacity=".16"/>
+                <stop offset="1" stop-color="#F0A648" stop-opacity="0"/>
               </radialGradient>
-              <linearGradient id="bWall" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#5E677F"/><stop offset="1" stop-color="#363D53"/>
+              <radialGradient id="bCore" cx=".5" cy=".5" r=".5">
+                <stop offset="0" stop-color="#FFFDF3"/>
+                <stop offset=".45" stop-color="#FFECB6" stop-opacity=".7"/>
+                <stop offset="1" stop-color="#FFD98D" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="bHalo" cx=".5" cy=".5" r=".5">
+                <stop offset="0" stop-color="#96ACDA" stop-opacity=".16"/>
+                <stop offset="1" stop-color="#96ACDA" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="bBeam" cx=".5" cy=".5" r=".5">
+                <stop offset="0" stop-color="#FFE7B0" stop-opacity=".45"/>
+                <stop offset=".6" stop-color="#FFD285" stop-opacity=".1"/>
+                <stop offset="1" stop-color="#FFD285" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="bWarmIn" cx=".5" cy=".5" r=".5">
+                <stop offset="0" stop-color="#FFC46A" stop-opacity=".3"/>
+                <stop offset="1" stop-color="#FFC46A" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="bHeart" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#FFF8E2"/>
+                <stop offset=".5" stop-color="#FFD264"/>
+                <stop offset="1" stop-color="#F29A1B"/>
               </linearGradient>
-              <linearGradient id="bCrack" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#FFF3CE"/><stop offset="1" stop-color="#FFC766"/>
+              <linearGradient id="bVoid" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#0A1020"/>
+                <stop offset=".18" stop-color="#03050A"/>
+                <stop offset=".5" stop-color="#000000"/>
+                <stop offset="1" stop-color="#000000"/>
               </linearGradient>
+              <linearGradient id="bFaceShade" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#0A1020" stop-opacity="0"/>
+                <stop offset=".45" stop-color="#080D18" stop-opacity=".35"/>
+                <stop offset="1" stop-color="#05080F" stop-opacity=".8"/>
+              </linearGradient>
+              <clipPath id="bLFaceClip">
+                <path d="M-10 152 L100 152 L104 175 L99 196 L105 220 L100 245 L106 270 L102 300 L-10 300 Z"/>
+              </clipPath>
+              <clipPath id="bRFaceClip">
+                <path d="M204 172 L330 172 L330 300 L210 300 L205 262 L211 238 L204 214 L210 192 Z"/>
+              </clipPath>
+              <clipPath id="bGapClip">
+                <path d="M100 152 L114 158 L126 153 L142 159 L156 154 L170 160 L184 155 L196 163 L204 172
+                         L210 192 L204 214 L211 238 L205 262 L210 300 L102 300 L106 270 L100 245 L105 220
+                         L99 196 L104 175 Z"/>
+              </clipPath>
             </defs>
+
+            <!-- ===== 하늘 ===== -->
             <rect width="320" height="300" fill="url(#bSky)"/>
-            <g fill="#FFFFFF" opacity=".55">
-              <circle cx="42" cy="34" r="2"/><circle cx="86" cy="22" r="1.6"/><circle cx="126" cy="46" r="1.8"/>
-              <circle cx="188" cy="24" r="1.6"/><circle cx="246" cy="40" r="2"/><circle cx="286" cy="72" r="1.6"/>
-              <circle cx="24" cy="96" r="1.6"/><circle cx="150" cy="16" r="1.4"/>
+            <rect x="150" width="170" height="300" fill="url(#bRightShade)"/>
+
+            <g fill="#FFFFFF">
+              <circle cx="36" cy="72" r="1.5" opacity=".5"/>
+              <circle cx="96" cy="50" r="1.3" opacity=".3"/>
+              <circle cx="196" cy="56" r="1.5" opacity=".45"/>
+              <circle cx="258" cy="42" r="1.4" opacity=".5"/>
+              <circle cx="300" cy="84" r="1.6" opacity=".36"/>
+              <circle cx="228" cy="94" r="1.2" opacity=".3"/>
+              <circle cx="182" cy="104" r="1.2" opacity=".25"/>
             </g>
-            <!-- 벽 너머의 빛 -->
-            <circle cx="258" cy="122" r="92" fill="url(#bLight)" opacity=".8"/>
-            <circle cx="258" cy="96" r="26" fill="#FFE8B8" opacity=".5"/>
-            <!-- 어두운 구름 -->
-            <g fill="#1E2536" opacity=".95">
-              <ellipse cx="64" cy="58" rx="56" ry="27"/>
-              <ellipse cx="108" cy="46" rx="36" ry="22"/>
-              <ellipse cx="28" cy="48" rx="28" ry="18"/>
+
+            <circle cx="228" cy="142" r="60" fill="url(#bHalo)"/>
+
+            <!-- ===== 하나님 쪽 빛 ===== -->
+            <circle cx="58" cy="114" r="118" fill="url(#bGlow)"/>
+            <ellipse cx="58" cy="80" rx="46" ry="96" fill="url(#bBeam)" opacity=".45"/>
+            <circle cx="58" cy="114" r="42" fill="url(#bCore)"/>
+            <circle cx="58" cy="114" r="12" fill="#FFFDF0" opacity=".85"/>
+            <g stroke="#FFE2A2" stroke-linecap="round" opacity=".38">
+              <line x1="58" y1="114" x2="14" y2="78" stroke-width="2.4"/>
+              <line x1="58" y1="114" x2="104" y2="76" stroke-width="2.4"/>
+              <line x1="58" y1="114" x2="6" y2="142" stroke-width="2.2"/>
+              <line x1="58" y1="114" x2="108" y2="146" stroke-width="2.2"/>
+              <line x1="58" y1="114" x2="58" y2="44" stroke-width="2.2"/>
             </g>
-            <!-- 아이 -->
-            <g fill="#0A0F1C">
-              <circle cx="94" cy="186" r="23"/>
-              <path d="M63 300 v-60 a31 31 0 0 1 62 0 v60 z"/>
+            <g transform="translate(58 114) scale(1.16)">
+              <path d="M0 14 C-18 3 -22 -10 -11.5 -16 C-5 -19.5 0 -14 0 -10.5 C0 -14 5 -19.5 11.5 -16 C22 -10 18 3 0 14 Z"
+                    fill="url(#bHeart)"/>
+              <path d="M-9.5 -8.5 C-12.5 -4.5 -12.5 0 -10.5 3" fill="none" stroke="#FFFFFF" stroke-width="2.2"
+                    stroke-linecap="round" opacity=".5"/>
             </g>
-            <!-- 땅 -->
-            <rect x="0" y="272" width="320" height="28" fill="#0A0F1C"/>
-            <!-- 벽 -->
-            <rect x="152" y="82" width="176" height="218" fill="url(#bWall)"/>
-            <g fill="#7B85A0" opacity=".42">
-              <rect x="160" y="94" width="38" height="16" rx="2"/><rect x="206" y="94" width="38" height="16" rx="2"/><rect x="252" y="94" width="38" height="16" rx="2"/><rect x="298" y="94" width="26" height="16" rx="2"/>
-              <rect x="182" y="118" width="38" height="16" rx="2"/><rect x="228" y="118" width="38" height="16" rx="2"/><rect x="274" y="118" width="38" height="16" rx="2"/>
-              <rect x="160" y="142" width="38" height="16" rx="2"/><rect x="206" y="142" width="38" height="16" rx="2"/><rect x="252" y="142" width="38" height="16" rx="2"/><rect x="298" y="142" width="26" height="16" rx="2"/>
-              <rect x="182" y="166" width="38" height="16" rx="2"/><rect x="228" y="166" width="38" height="16" rx="2"/><rect x="274" y="166" width="38" height="16" rx="2"/>
-              <rect x="160" y="190" width="38" height="16" rx="2"/><rect x="206" y="190" width="38" height="16" rx="2"/><rect x="252" y="190" width="38" height="16" rx="2"/><rect x="298" y="190" width="26" height="16" rx="2"/>
-              <rect x="182" y="214" width="38" height="16" rx="2"/><rect x="228" y="214" width="38" height="16" rx="2"/><rect x="274" y="214" width="38" height="16" rx="2"/>
-              <rect x="160" y="238" width="38" height="16" rx="2"/><rect x="206" y="238" width="38" height="16" rx="2"/><rect x="252" y="238" width="38" height="16" rx="2"/><rect x="298" y="238" width="26" height="16" rx="2"/>
-              <rect x="182" y="262" width="38" height="16" rx="2"/><rect x="228" y="262" width="38" height="16" rx="2"/><rect x="274" y="262" width="38" height="16" rx="2"/>
+
+            <!-- ===== 골짜기 (깊고 캄캄한 틈) ===== -->
+            <path d="M100 152 L114 158 L126 153 L142 159 L156 154 L170 160 L184 155 L196 163 L204 172
+                     L210 192 L204 214 L211 238 L205 262 L210 300 L102 300 L106 270 L100 245 L105 220
+                     L99 196 L104 175 Z" fill="url(#bVoid)"/>
+            <g clip-path="url(#bGapClip)">
+              <circle cx="106" cy="200" r="36" fill="url(#bWarmIn)" opacity=".8"/>
+              <g fill="#39445E">
+                <circle cx="203" cy="204" r="1.8"/>
+                <circle cx="197" cy="222" r="1.3" opacity=".7"/>
+                <circle cx="202" cy="242" r="1" opacity=".5"/>
+              </g>
             </g>
-            <rect x="152" y="82" width="176" height="9" fill="#8A94AD" opacity=".8"/>
-            <rect x="152" y="82" width="176" height="3.5" fill="#FFD79B" opacity=".55"/>
-            <!-- 틈으로 새는 빛 -->
-            <ellipse cx="196" cy="182" rx="24" ry="120" fill="url(#bLight)" opacity=".85"/>
-            <path d="M193 300 L189 248 L194 206 L190 82 L197 82 L201 206 L196 248 L201 300 Z" fill="url(#bCrack)"/>
+            <path d="M100 152 L114 158 L126 153 L142 159 L156 154 L170 160 L184 155 L196 163 L204 172"
+                  fill="none" stroke="#1D2739" stroke-width="1.6" stroke-opacity=".9"/>
+
+            <!-- ===== 왼쪽 절벽 ===== -->
+            <g>
+              <path d="M-10 152 L100 152 L104 175 L99 196 L105 220 L100 245 L106 270 L102 300 L-10 300 Z"
+                    fill="#33405C"/>
+              <rect x="-10" y="152" width="120" height="160" fill="url(#bFaceShade)" clip-path="url(#bLFaceClip)"/>
+              <path d="M-10 144 L100 144 L100 152 L-10 152 Z" fill="#4E5B7A"/>
+              <path d="M-10 144.6 L100 144.6" fill="none" stroke="#FFD68A" stroke-width="2.6"
+                    stroke-linecap="round" stroke-opacity=".75"/>
+              <path d="M100 144 L100 152 L104 175 L99 196 L105 220 L100 245 L106 270 L102 300"
+                    fill="none" stroke="#8FA0C6" stroke-width="2" stroke-linejoin="round" stroke-opacity=".55"/>
+              <g fill="#2C3650" opacity=".55">
+                <path d="M-10 186 L28 178 L52 186 L20 196 Z"/>
+                <path d="M22 214 L64 202 L84 212 L44 226 Z"/>
+                <path d="M-10 246 L34 234 L66 244 L28 258 Z"/>
+              </g>
+            </g>
+
+            <!-- ===== 오른쪽 언덕 ===== -->
+            <g>
+              <path d="M204 172 L330 172 L330 300 L210 300 L205 262 L211 238 L204 214 L210 192 Z"
+                    fill="#2A3450"/>
+              <rect x="200" y="172" width="140" height="140" fill="url(#bFaceShade)" clip-path="url(#bRFaceClip)"/>
+              <path d="M204 164 L330 164 L330 172 L204 172 Z" fill="#3D4A66"/>
+              <path d="M204 164.6 L330 164.6" fill="none" stroke="#9FB0D0" stroke-width="2.2"
+                    stroke-linecap="round" stroke-opacity=".35"/>
+              <path d="M204 164 L204 172 L210 192 L204 214 L211 238 L205 262 L210 300"
+                    fill="none" stroke="#8494B2" stroke-width="1.9" stroke-linejoin="round" stroke-opacity=".45"/>
+              <g fill="#242E47" opacity=".55">
+                <path d="M226 204 L272 192 L298 202 L250 214 Z"/>
+                <path d="M240 240 L292 224 L320 232 L268 250 Z"/>
+                <path d="M214 272 L268 256 L300 266 L250 284 Z"/>
+              </g>
+            </g>
+
+            <!-- ===== 먹구름 ===== -->
+            <g fill="#243050" transform="translate(0 -3)" opacity=".3">
+              <ellipse cx="158" cy="120" rx="40" ry="12"/>
+              <ellipse cx="132" cy="113" rx="21" ry="8.5"/>
+              <ellipse cx="184" cy="111" rx="18" ry="7.5"/>
+            </g>
+            <g fill="#0B101A">
+              <ellipse cx="158" cy="120" rx="40" ry="12"/>
+              <ellipse cx="132" cy="113" rx="21" ry="8.5"/>
+              <ellipse cx="184" cy="111" rx="18" ry="7.5"/>
+              <ellipse cx="152" cy="105" rx="13" ry="5.5" opacity=".9"/>
+            </g>
+            <g fill="#1B2334" opacity=".4">
+              <ellipse cx="148" cy="128" rx="22" ry="4.5"/>
+              <ellipse cx="180" cy="129" rx="14" ry="3.4"/>
+            </g>
+
+            <!-- ===== 가시덤불 (틈 양쪽 가장자리) ===== -->
+            <g fill="#0A0E17">
+              <path d="M96 152 l-2 -9 l5 3 l-1 -8 l4 5 l1 -7 l3 6 l3 -5 l-1 8 l4 -2 l-3 7 z"/>
+              <path d="M109 156 l-1 -8 l4 4 l0 -7 l4 5 l2 -6 l1 7 l4 -3 l-3 7 z"/>
+              <path d="M206 172 l1 -8 l-5 3 l2 -7 l-4 4 l-1 -6 l-2 7 l-4 -2 l4 6 z"/>
+              <path d="M196 166 l1 -7 l-5 2 l2 -6 l-4 4 l-1 -6 l-2 6 l-3 -2 l3 6 z" opacity=".95"/>
+            </g>
+            <g fill="#3E4A66" opacity=".55">
+              <path d="M94 145 l2 -3 l1 3 z"/><path d="M103 142 l2 -3 l0 3 z"/>
+              <path d="M205 166 l-2 -3 l-1 3 z"/><path d="M195 161 l-2 -3 l0 3 z"/>
+            </g>
+
+            <!-- ===== 아이 ===== -->
+            <ellipse cx="223" cy="172.5" rx="13.5" ry="3.2" fill="#0B111C" opacity=".5"/>
+            <!-- ===== 아이 ===== -->
+            <g fill="#05070D" stroke="#05070D" stroke-linecap="round" stroke-linejoin="round"
+               transform="rotate(-4 223 172)">
+              <!-- 다리 -->
+              <path d="M219 158 L218 169" stroke-width="7" fill="none"/>
+              <path d="M228 158 L229.5 169" stroke-width="7" fill="none"/>
+              <!-- 신발 -->
+              <path d="M212.5 171 Q212.5 168 216.5 168 L222 168 L222 172 L212.5 172 Z" stroke="none"/>
+              <path d="M224.5 171 Q224.5 168 228.5 168 L234 168 L234 172 L224.5 172 Z" stroke="none"/>
+              <!-- 몸통 -->
+              <path d="M216.5 160.5 L216.5 150.5 Q216.5 143.5 224.5 143.5 Q232.5 143.5 232.5 150.5 L232.5 160.5 Z" stroke="none"/>
+              <!-- 내미는 팔 -->
+              <path d="M218.5 147.5 L207 151.5" stroke-width="5.6" fill="none"/>
+              <circle cx="206.2" cy="151.8" r="2.9" stroke="none"/>
+              <!-- 뒷팔 -->
+              <path d="M230.5 148.5 L233.5 158" stroke-width="5" fill="none"/>
+              <!-- 머리 -->
+              <circle cx="224" cy="131" r="10.4" stroke="none"/>
+              <path d="M213.8 131.2 Q212.3 133.2 213.4 134.8 Q214.9 135 215.4 133.2 Z" stroke="none"/>
+              <path d="M229.4 121.4 C232.6 122.6 233.2 125.4 231.4 127.6 C230.8 124.8 229.2 123.4 227.2 123 Z" stroke="none"/>
+            </g>
+            <g fill="none" stroke="#FFD08A" stroke-linecap="round" transform="rotate(-4 223 172)">
+              <path d="M215.4 126.2 A10.4 10.4 0 0 0 215.4 135.8" stroke-width="2" stroke-opacity=".6"/>
+              <path d="M218.8 145.8 L208.6 149.4" stroke-width="1.5" stroke-opacity=".35"/>
+            </g>
           </svg>
           <span class="kicker">2 · 검정색</span>
         </div>
