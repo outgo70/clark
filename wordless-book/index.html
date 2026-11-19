@@ -220,20 +220,21 @@
   .page[data-page="prayer"]{padding:8px}
   .page[data-page="prayer"] .cardbody{padding:14px 15px 14px}
   .page[data-page="prayer"] h2{font-size:clamp(25px,6.8vw,30px);margin-bottom:4px}
-  .prayer{list-style:none;margin:9px 0 12px;padding:0;display:flex;flex-direction:column;gap:7px}
-  .prayer li{
-    display:flex;gap:9px;
-    background:#FFFDF8;border:1px solid #F2E7D3;border-radius:16px;
-    padding:9px 11px;
-    font-size:clamp(16px,4.3vw,17.2px);line-height:1.46;color:#40394A;
-    letter-spacing:-.3px;word-break:keep-all;
+  .prayerbox{
+    position:relative;margin:8px 0 8px;padding:14px 15px 13px;border-radius:20px;
+    background:linear-gradient(160deg,#FFFDF6,#FFF4DC);
+    border:1.5px solid #F0DFBB;
+    box-shadow:inset 0 0 0 4px #fff;
   }
-  .prayer li .n{
-    flex:0 0 auto;width:26px;height:26px;border-radius:50%;
-    background:#FFEFC9;color:#A9791A;
-    font-size:14px;font-weight:900;
-    display:flex;align-items:center;justify-content:center;margin-top:1px;
+  .prayerbox p{
+    margin:0 0 9px;font-size:clamp(16px,4.4vw,17.6px);line-height:1.55;
+    color:#4A3F2C;letter-spacing:-.35px;word-break:keep-all;
   }
+  .prayerbox p:last-child{margin-bottom:0}
+  .prayerbox .amenline{font-weight:900;color:#A9661B}
+  .prayerart{flex:1 1 auto;display:flex;align-items:center;justify-content:center;min-height:0;padding:2px 0 6px}
+  .prayerart svg{height:clamp(88px,18vh,186px);width:auto;max-width:100%;display:block}
+  @media (max-height:700px){ .prayerart{display:none} }
   .amen{
     display:block;width:100%;min-height:58px;margin-top:auto;border:0;border-radius:18px;
     background:linear-gradient(135deg,#FF9A6B,#E8503F);
@@ -640,8 +641,8 @@
         </div>
         <div class="cardbody">
           <h2>보이지 않아도 있어요</h2>
-          <p class="desc">바람은 눈에 보이지 않지만 나뭇잎이 흔들리는 걸 보면 바람이 있는 걸 알 수 있어요.</p>
-          <p class="pointline">하나님도 눈에 보이지 않지만<br><b>지금 살아계셔요!</b></p>
+          <p class="desc">보이지 않는 바람이 있는 것처럼 하나님도 지금 살아 계셔요.</p>
+          <p class="pointline">하나님은 지금<br><b>내 곁에 살아 계세요!</b></p>
           <div class="verse" role="button" tabindex="0"
                data-vkey="wind" data-vref="히브리서 11장 6절"
                data-vhint="나뭇잎이 흔들리면 보이지 않는 바람을 알 수 있듯이, 하나님도 눈에 보이지 않지만 지금 살아계세요."
@@ -732,8 +733,8 @@
           <span class="kicker">1 · 황금색</span>
         </div>
         <div class="cardbody">
-          <h2 class="h2long">그 살아계신 하나님은<br>너를 아주 많이 사랑하셔요!</h2>
-          <p class="desc">하나님이 너를 위해 아름다운 천국을 준비하셨어요.</p>
+          <h2 class="h2long">하나님이 너를<br>아주 많이 사랑하셔요!</h2>
+          <p class="desc">그 살아계신 하나님은 우리를 사랑하시고 천국을 만드셨어요.</p>
           <div class="verse" role="button" tabindex="0"
                data-vkey="gold" data-vref="요한복음 3장 16절"
                data-vhint="황금색은 가장 좋은 것, 하나님의 하늘나라를 보여 줘요."
@@ -961,8 +962,8 @@
           <span class="kicker">2 · 검정색</span>
         </div>
         <div class="cardbody">
-          <h2>죄 때문에 멀어졌어요</h2>
-          <p class="desc">죄 때문에 하나님과 멀어졌어요.</p>
+          <h2>하나님과 멀어졌어요</h2>
+          <p class="desc">모든 사람은 죄 때문에 하나님과 멀어져 천국에 갈 수 없어요.</p>
           <div class="verse" role="button" tabindex="0"
                data-vkey="black" data-vref="로마서 3장 23절"
                data-vhint="죄는 하나님과 나 사이에 벽을 세워요. 하나님은 그 벽을 무너뜨릴 길을 준비하셨어요."
@@ -979,10 +980,10 @@
     </section>
 
     <!-- ================= 빨강색 ================= -->
-    <section class="page story" data-page="red" aria-label="빨강색 - 예수님의 십자가 보혈">
+    <section class="page story" data-page="red" aria-label="빨강색 - 예수님이 죽으시고 다시 살아나셨어요">
       <div class="card" style="--deep:#A82C2C;--tint:#FDECEA">
         <div class="artwrap">
-          <svg class="art" viewBox="0 0 320 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="붉은 새벽 하늘 아래 언덕 위의 십자가와 사랑의 하트">
+          <svg class="art" viewBox="0 0 320 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="붉은 새벽 하늘 아래, 돌문이 굴려진 빈 무덤에서 따뜻한 빛이 흘러나오고 그 오른쪽 언덕에 사랑의 하트가 달린 십자가가 서 있는 모습">
             <defs>
               <linearGradient id="rSky" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#241637"/><stop offset=".4" stop-color="#7B2F3C"/><stop offset=".72" stop-color="#C4594A"/><stop offset="1" stop-color="#F6A867"/>
@@ -993,56 +994,84 @@
               <linearGradient id="rWood" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#8A5136"/><stop offset="1" stop-color="#4A2519"/>
               </linearGradient>
+              <linearGradient id="rRock" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#8A4F60"/><stop offset=".5" stop-color="#5E3345"/><stop offset="1" stop-color="#371D2B"/>
+              </linearGradient>
+              <radialGradient id="rStone" cx=".36" cy=".3" r=".78">
+                <stop offset="0" stop-color="#D8D1D4"/><stop offset=".55" stop-color="#B0A6AC"/><stop offset="1" stop-color="#736A70"/>
+              </radialGradient>
+              <radialGradient id="rTombLight" cx=".5" cy=".55" r=".5">
+                <stop offset="0" stop-color="#FFFDF2"/><stop offset=".5" stop-color="#FFEFC0" stop-opacity=".92"/><stop offset="1" stop-color="#FFD98D" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="rTombBeam" cx=".5" cy=".5" r=".5">
+                <stop offset="0" stop-color="#FFF3CC" stop-opacity=".6"/><stop offset="1" stop-color="#FFF3CC" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="rTombIn" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#2A1620"/><stop offset=".55" stop-color="#5A3226"/><stop offset="1" stop-color="#FFE0A0"/>
+              </linearGradient>
             </defs>
             <rect width="320" height="300" fill="url(#rSky)"/>
-            <circle cx="160" cy="150" r="118" fill="url(#rGlow)"/>
-            <g stroke="#FFD79B" stroke-width="3" stroke-linecap="round" opacity=".45">
-              <line x1="160" y1="6" x2="160" y2="30"/>
-              <line x1="84" y1="26" x2="96" y2="44"/>
-              <line x1="236" y1="26" x2="224" y2="44"/>
-              <line x1="34" y1="104" x2="56" y2="110"/>
-              <line x1="286" y1="104" x2="264" y2="110"/>
-            </g>
+            <circle cx="176" cy="146" r="118" fill="url(#rGlow)"/>
             <!-- 언덕 -->
             <path d="M0 224 C58 200 104 214 160 218 C216 222 264 204 320 216 L320 300 L0 300 Z" fill="#49253A"/>
             <path d="M0 252 C70 236 122 246 172 250 C226 254 274 242 320 250 L320 300 L0 300 Z" fill="#33182A"/>
+
+            <!-- ===== 빈 무덤 (돌문이 굴려져 있음) ===== -->
+            <g>
+              <ellipse cx="88" cy="258" rx="74" ry="9" fill="#2A1220" opacity=".45"/>
+              <!-- 바위 무덤 -->
+              <path d="M14 254 L14 216 L24 190 L44 174 L72 168 L100 173 L122 188 L136 212 L148 254 Z" fill="url(#rRock)"/>
+              <path d="M24 190 L44 174 L72 168 L100 173 L122 188 L110 196 L86 190 L58 198 L34 202 Z" fill="#9B5C70" opacity=".5"/>
+              <path d="M122 188 L136 212 L148 254 L124 254 L118 214 Z" fill="#8B4E60" opacity=".35"/>
+              <g stroke="#3A1E2C" stroke-width="2" fill="none" opacity=".3" stroke-linecap="round">
+                <path d="M30 206 L52 214 L48 232"/>
+                <path d="M98 200 L106 218"/>
+                <path d="M130 228 L138 244"/>
+              </g>
+              <!-- 입구 -->
+              <path d="M80 252 L80 218 A20 22 0 0 1 120 218 L120 252 Z" fill="#170B14"/>
+              <path d="M82 251 L82 219 A18 20 0 0 1 118 219 L118 251 Z" fill="url(#rTombIn)"/>
+              <!-- 무덤 속에서 새어 나오는 빛 -->
+              <ellipse cx="100" cy="240" rx="26" ry="20" fill="url(#rTombBeam)" opacity=".9"/>
+              <ellipse cx="100" cy="248" rx="14" ry="6" fill="#FFF0C4" opacity=".55"/>
+              <!-- 굴려진 돌문 -->
+              <g>
+                <ellipse cx="58" cy="252" rx="24" ry="6.5" fill="#2A1220" opacity=".4"/>
+                <circle cx="54" cy="239" r="20" fill="url(#rStone)"/>
+                <path d="M40 232 C46 226 54 225 60 228" stroke="#C9C0C5" stroke-width="2.2" fill="none" stroke-linecap="round" opacity=".45"/>
+              </g>
+            </g>
+
             <!-- 십자가 -->
-            <rect x="146" y="52" width="28" height="204" rx="9" fill="url(#rWood)"/>
-            <rect x="88" y="104" width="144" height="28" rx="9" fill="url(#rWood)"/>
-            <rect x="153" y="58" width="5" height="192" rx="2.5" fill="#B07A55" opacity=".55"/>
-            <rect x="94" y="110" width="132" height="5" rx="2.5" fill="#B07A55" opacity=".45"/>
-            <!-- 사랑의 하트 -->
-            <path d="M160 182 C160 170 142 164 132 173 C122 182 123 198 133 207 L160 228 L187 207 C197 198 198 182 188 173 C178 164 160 170 160 182 Z" fill="#E8382F"/>
-            <path d="M142 180 c-4 8 -2 16 3 22" stroke="#FFB4A4" stroke-width="4" fill="none" stroke-linecap="round" opacity=".9"/>
-            <!-- 사람들 -->
-            <g fill="#1C0E1A">
-              <circle cx="84" cy="248" r="10"/>
-              <path d="M70 300 v-32 a14 14 0 0 1 28 0 v32 z"/>
-              <path d="M96 276 l16 -8" stroke="#1C0E1A" stroke-width="5" stroke-linecap="round" fill="none"/>
-              <circle cx="119" cy="264" r="7"/>
-              <path d="M111 300 v-20 a8 8 0 0 1 16 0 v20 z"/>
-              <path d="M113 282 l-13 -4" stroke="#1C0E1A" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <g transform="translate(54 0)">
+              <rect x="146" y="52" width="28" height="204" rx="9" fill="url(#rWood)"/>
+              <rect x="88" y="104" width="144" height="28" rx="9" fill="url(#rWood)"/>
+              <rect x="153" y="58" width="5" height="192" rx="2.5" fill="#B07A55" opacity=".55"/>
+              <rect x="94" y="110" width="132" height="5" rx="2.5" fill="#B07A55" opacity=".45"/>
+              <!-- 사랑의 하트 -->
+              <path d="M160 182 C160 170 142 164 132 173 C122 182 123 198 133 207 L160 228 L187 207 C197 198 198 182 188 173 C178 164 160 170 160 182 Z" fill="#E8382F"/>
+              <path d="M142 180 c-4 8 -2 16 3 22" stroke="#FFB4A4" stroke-width="4" fill="none" stroke-linecap="round" opacity=".9"/>
             </g>
             <g fill="#FFE7C0" opacity=".85">
-              <path d="M56 66 l2.4 5.4 5.4 2.4 -5.4 2.4 -2.4 5.4 -2.4 -5.4 -5.4 -2.4 5.4 -2.4 z"/>
-              <path d="M266 52 l2.2 5 5 2.2 -5 2.2 -2.2 5 -2.2 -5 -5 -2.2 5 -2.2 z"/>
+              <path d="M276 52 l2.4 5.4 5.4 2.4 -5.4 2.4 -2.4 5.4 -2.4 -5.4 -5.4 -2.4 5.4 -2.4 z"/>
+              <path d="M298 116 l2.2 5 5 2.2 -5 2.2 -2.2 5 -2.2 -5 -5 -2.2 5 -2.2 z"/>
             </g>
           </svg>
           <span class="kicker">3 · 빨강색</span>
         </div>
         <div class="cardbody">
           <h2>예수님이 대신 벌을 받으셨어요</h2>
-          <p class="desc">예수님이 우리 죄를 대신해 십자가에서 피 흘려 죽으시고 사흘 만에 다시 살아나셨어요.</p>
+          <p class="desc">예수님은 우리 죄를 위하여 십자가에서 죽으시고 다시 살아나셨어요.</p>
           <div class="verse" role="button" tabindex="0"
-               data-vkey="red" data-vref="로마서 5장 8절"
-               data-vhint="빨간색은 예수님이 우리를 위해 흘리신 사랑의 피예요."
-               data-vtext="우리가 아직 죄인 되었을 때에 그리스도께서 우리를 위하여 죽으심으로 하나님께서 우리에 대한 자기의 사랑을 확증하셨느니라"
-               aria-label="로마서 5장 8절 성경구절 크게 보기">
+               data-vkey="red" data-vref="고린도전서 15장 3~4절"
+               data-vhint="빨간색은 예수님이 우리를 위해 흘리신 사랑의 피예요. 예수님이 다시 살아나셔서 우리에게 새 생명을 주셨어요."
+               data-vtext="그리스도께서 우리 죄를 위하여 죽으시고… 성경대로 사흘 만에 다시 살아나사"
+               aria-label="고린도전서 15장 3~4절 성경구절 크게 보기">
             <div class="vhead">
-              <span class="vref">로마서 5장 8절</span>
+              <span class="vref">고린도전서 15장 3~4절</span>
               <span class="vzoom">🔍 크게 보기</span>
             </div>
-            <div class="vtext">우리가 아직 죄인 되었을 때에 그리스도께서 우리를 위하여 죽으심으로 하나님께서 우리에 대한 자기의 사랑을 확증하셨느니라</div>
+            <div class="vtext">그리스도께서 우리 죄를 위하여 죽으시고… 성경대로 사흘 만에 다시 살아나사</div>
           </div>
         </div>
       </div>
@@ -1099,17 +1128,17 @@
         </div>
         <div class="cardbody">
           <h2>눈보다 더 깨끗해져요</h2>
-          <p class="desc">예수님을 믿으면 죄를 용서받고 눈보다 더 희게 깨끗해져요.</p>
+          <p class="desc">예수님을 믿으면 죄를 용서받고 하나님의 자녀가 될 수 있어요.</p>
           <div class="verse" role="button" tabindex="0"
-               data-vkey="white" data-vref="요한일서 1장 9절"
-               data-vhint="하얀색은 예수님이 씻어 주신 깨끗한 마음이에요."
-               data-vtext="만일 우리가 우리 죄를 자백하면 그는 미쁘시고 의로우사 우리 죄를 사하시며 우리를 모든 불의에서 깨끗하게 하실 것이요"
-               aria-label="요한일서 1장 9절 성경구절 크게 보기">
+               data-vkey="white" data-vref="요한복음 1장 12절"
+               data-vhint="하얀색은 예수님이 씻어 주신 깨끗한 마음이에요. 예수님을 믿으면 하나님의 자녀가 돼요."
+               data-vtext="영접하는 자 곧 그 이름을 믿는 자들에게는 하나님의 자녀가 되는 권세를 주셨으니"
+               aria-label="요한복음 1장 12절 성경구절 크게 보기">
             <div class="vhead">
-              <span class="vref">요한일서 1장 9절</span>
+              <span class="vref">요한복음 1장 12절</span>
               <span class="vzoom">🔍 크게 보기</span>
             </div>
-            <div class="vtext">만일 우리가 우리 죄를 자백하면 그는 미쁘시고 의로우사 우리 죄를 사하시며 우리를 모든 불의에서 깨끗하게 하실 것이요</div>
+            <div class="vtext">영접하는 자 곧 그 이름을 믿는 자들에게는 하나님의 자녀가 되는 권세를 주셨으니</div>
           </div>
         </div>
       </div>
@@ -1204,15 +1233,33 @@
       <div class="card">
         <div class="cardbody">
           <div class="kicker inline" style="--deep:#8A6008;--tint:#FFF4D6">🙏 영접기도</div>
-          <h2>예수님을 내 마음에 모셔요</h2>
-          <p class="desc" style="font-size:15px;color:#6F6553">한 줄씩 함께 따라 읽어 보세요.</p>
-          <ol class="prayer">
-            <li><span class="n">1</span><span>하나님, 저는 잘못한 것이 많은 죄인인 것을 인정해요.</span></li>
-            <li><span class="n">2</span><span>예수님이 제 죄를 대신해 십자가에서 죽으시고 다시 살아나신 것을 믿어요.</span></li>
-            <li><span class="n">3</span><span>예수님, 제 마음의 문을 열게요. 지금 제 마음에 들어와 주세요.</span></li>
-            <li><span class="n">4</span><span>제 죄를 용서해 주시고, 저를 하나님의 자녀로 삼아 주셔서 감사해요.</span></li>
-            <li><span class="n">5</span><span>이제 하나님의 자녀로 살겠습니다. 예수님의 이름으로 기도합니다. 아멘.</span></li>
-          </ol>
+          <h2 class="h2long">예수님을 믿기 원하면<br>이렇게 기도하세요</h2>
+          <div class="prayerbox">
+            <p>하나님, 저는 죄인이에요.</p>
+            <p>예수님께서 저의 죄를 위해 죽으시고 사신 것을 믿어요.</p>
+            <p>제 마음에 오셔서 저를 변화시켜주세요.</p>
+            <p class="amenline">예수님 이름으로 기도합니다. 아멘</p>
+          </div>
+          <div class="prayerart" aria-hidden="true">
+            <svg viewBox="0 0 200 170">
+              <defs>
+                <radialGradient id="paGlow" cx=".5" cy=".5" r=".5">
+                  <stop offset="0" stop-color="#FFF7DE"/><stop offset=".62" stop-color="#FFE9B4" stop-opacity=".5"/><stop offset="1" stop-color="#FFE9B4" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="paHeart" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#FFB6A4"/><stop offset="1" stop-color="#EE6A57"/>
+                </linearGradient>
+              </defs>
+              <circle cx="100" cy="86" r="82" fill="url(#paGlow)"/>
+              <path d="M100 126 C100 126 50 99 50 71 C50 52 65 42 82 46 C92 49 97 57 100 63 C103 57 108 49 118 46 C135 42 150 52 150 71 C150 99 100 126 100 126 Z" fill="url(#paHeart)" opacity=".95"/>
+              <path d="M100 104 L100 72 M87 82 L113 82" stroke="#FFFDF3" stroke-width="7" stroke-linecap="round"/>
+              <g fill="#FFD07A">
+                <path d="M34 50 l2.6 6 6 2.6 -6 2.6 -2.6 6 -2.6 -6 -6 -2.6 6 -2.6 z"/>
+                <path d="M168 62 l2.2 5 5 2.2 -5 2.2 -2.2 5 -2.2 -5 -5 -2.2 5 -2.2 z"/>
+                <path d="M156 118 l1.8 4 4 1.8 -4 1.8 -1.8 4 -1.8 -4 -4 -1.8 4 -1.8 z"/>
+              </g>
+            </svg>
+          </div>
           <button id="amenBtn" class="amen">아멘! 예수님을 믿어요</button>
         </div>
       </div>
