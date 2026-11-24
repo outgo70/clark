@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0a0c11">
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -259,6 +260,93 @@
     border:1px solid rgba(47,211,164,.18);font-size:11.5px;color:#cdd7e6;line-height:1.5}
   .callout b{color:#6ef0c9}
 
+  /* ── v2 · 원금 vs 자산 ── */
+  .pv-line{display:flex;align-items:baseline;justify-content:space-between;gap:8px;font-size:11px;color:var(--muted);margin-bottom:6px}
+  .pv-line b{font-size:13.5px;font-weight:800;color:var(--text);letter-spacing:-.02em;white-space:nowrap}
+  .pv-track{height:12px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden;margin-bottom:12px}
+  .pv-track:last-of-type{margin-bottom:0}
+  .pv-track i{display:block;height:100%;border-radius:999px}
+  .pv-diff{font-size:11px;color:var(--muted);line-height:1.55;padding-top:11px;margin-top:12px;border-top:1px dashed rgba(255,255,255,.11)}
+  .pv-diff b{font-weight:800}
+
+  /* ── v2 · 1억 궤적 ── */
+  .traj{margin-top:14px;padding-top:13px;border-top:1px solid var(--line2)}
+  .traj-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+  .traj-head b{font-size:12.5px;font-weight:750;letter-spacing:-.02em}
+  .traj-head span{font-size:10px;color:var(--muted2);flex:none}
+  .traj-res{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:3px 0 6px}
+  .traj-res span{font-size:10.5px;color:var(--muted2)}
+  .traj-res b{font-size:14px;font-weight:800;color:#bcd3ff;letter-spacing:-.02em}
+  .traj-res b em{font-style:normal;font-size:10.5px;font-weight:700;color:var(--muted);margin-left:4px;letter-spacing:0}
+  .traj svg{width:100%;height:auto;display:block}
+  .traj-cap{font-size:10px;color:var(--muted2);line-height:1.5;margin-top:5px}
+
+  /* ── v2 · 절세 계좌 게이지 ── */
+  .gauge-intro{margin:0 0 12px;font-size:11px;color:var(--muted);line-height:1.5}
+  .gr+.gr{border-top:1px solid var(--line2);padding-top:11px;margin-top:11px}
+  .gr-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+  .gr-top b{font-size:12.5px;font-weight:700;letter-spacing:-.02em}
+  .gr-top .chip{min-width:0;font-size:9.5px;padding:3px 7px}
+  .gr-track{position:relative;height:9px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+  .gr-track i{display:block;height:100%;border-radius:999px;opacity:.95}
+  .gr-foot{display:flex;justify-content:space-between;font-size:10px;color:var(--muted2);margin-top:5px}
+  .gr-foot em{font-style:normal;font-weight:800;color:#8ff0d0}
+  .gauge-note{margin-top:12px;padding:11px 12px;border-radius:13px;background:rgba(91,141,255,.1);
+    border:1px solid rgba(91,141,255,.22);font-size:11px;color:#cfdbf5;line-height:1.5}
+  .gauge-note b{color:#a9c6ff;font-weight:750}
+  .gauge-sub{font-size:9.5px;color:var(--muted2);margin:8px 0 0;line-height:1.45}
+
+  /* ── v2 · 계산기 해설 ── */
+  .why{margin-top:9px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.035);
+    border:1px dashed rgba(255,255,255,.14);font-size:11px;color:#bec9da;line-height:1.55}
+  .why b{color:#e2eafb;font-weight:800}
+  .why em{font-style:normal;color:#8fb4ff;font-weight:750}
+
+  /* ── v2 · 배당 카드 ── */
+  .dvgrid{display:flex;gap:12px;margin-bottom:11px}
+  .dvgrid>div{flex:1;min-width:0}
+  .dvgrid span{display:block;font-size:10px;color:var(--muted2);margin-bottom:2px}
+  .dvgrid b{display:block;font-size:15.5px;font-weight:800;letter-spacing:-.03em;white-space:nowrap}
+  .dvgrid i{display:block;font-style:normal;font-size:10px;color:var(--muted2);margin-top:1px}
+  .dvbar{position:relative;height:12px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+  .dvbar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#1fa985,#2fd3a4)}
+  .dvfoot{font-size:10.5px;color:var(--muted);margin-top:8px;line-height:1.5}
+  .dvfoot b{color:#8ff0d0;font-weight:800}
+
+  /* ── v2 · 체크리스트 ── */
+  .chk-bar{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+  .chk-bar .cp{flex:1;height:7px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden}
+  .chk-bar .cp i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#2fd3a4,#4d8dff);transition:width .25s}
+  .chk-bar b{font-size:11px;font-weight:800;color:#b9c6dc;flex:none}
+  .chk-item{position:relative;display:flex;align-items:flex-start;gap:11px;padding:12px 0;
+    border-bottom:1px solid var(--line2);cursor:pointer}
+  .chk-item:last-child{border-bottom:0;padding-bottom:2px}
+  .chk-item input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+  .chk-item .box{flex:none;width:23px;height:23px;border-radius:8px;border:1.6px solid rgba(255,255,255,.22);
+    background:rgba(255,255,255,.03);display:grid;place-items:center;margin-top:1px;transition:.15s}
+  .chk-item .box svg{width:13px;height:13px;stroke:#08110d;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;
+    opacity:0;transform:scale(.6);transition:.15s}
+  .chk-item input:checked+.box{background:linear-gradient(135deg,#2fd3a4,#1fa985);border-color:#2fd3a4}
+  .chk-item input:checked+.box svg{opacity:1;transform:none}
+  .chk-item input:checked~.tx b{color:var(--muted2);text-decoration:line-through;text-decoration-color:rgba(143,151,169,.55)}
+  .chk-item input:focus-visible+.box{outline:2px solid #7fb0ff;outline-offset:2px}
+  .chk-item .tx{display:block;min-width:0}
+  .chk-item .tx em{display:block;font-style:normal;font-size:9.5px;font-weight:800;color:#8fb4ff;
+    letter-spacing:.03em;margin-bottom:3px}
+  .chk-item .tx b{display:block;font-size:12.5px;font-weight:650;line-height:1.45;letter-spacing:-.02em;color:#e6ecf8;transition:.15s}
+  .reset{width:100%;margin-top:9px;padding:11px;border-radius:13px;border:1px solid var(--line);
+    background:rgba(255,255,255,.04);color:var(--muted);font-family:inherit;font-size:11.5px;
+    font-weight:700;cursor:pointer;letter-spacing:-.01em}
+  .reset:active{transform:scale(.99);background:rgba(255,255,255,.08)}
+  .chk-note{font-size:9.5px;color:var(--muted2);margin-top:8px;text-align:center}
+  .mind{margin-top:10px;padding:13px 15px 14px;border-radius:16px;
+    background:linear-gradient(135deg,rgba(47,211,164,.1),rgba(91,141,255,.07));
+    border:1px solid rgba(47,211,164,.2)}
+  .mind .tg{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.05em;color:#6ef0c9;
+    background:rgba(47,211,164,.14);border:1px solid rgba(47,211,164,.24);padding:3px 7px;border-radius:6px;margin-bottom:8px}
+  .mind p{margin:0;font-size:12px;color:#dbe6f3;line-height:1.55}
+  .mind p b{color:#8ff0d0}
+
   /* ── 하단 탭바 ── */
   .tabbar{
     position:fixed;bottom:0;left:0;right:0;z-index:30;max-width:480px;margin:0 auto;
@@ -386,6 +474,44 @@
         </div>
       </div>
 
+      <div class="sect"><h2>누적 원금 vs 현재 자산</h2><span class="hint">넣은 돈 · 지금 가치</span></div>
+      <div class="card">
+        <div class="pv-line"><span>넣은 돈 (누적 원금)</span><b class="num" id="pvCost">7,187만 원</b></div>
+        <div class="pv-track"><i style="width:100%;background:linear-gradient(90deg,#4d8dff,#8b6bff)"></i></div>
+        <div class="pv-line"><span>지금 가치 (평가금액)</span><b class="num" id="pvEval">6,328만 원</b></div>
+        <div class="pv-track"><i id="pvEvalBar" style="width:88.1%;background:linear-gradient(90deg,#2ec4a6,#1fa985)"></i></div>
+        <div class="pv-diff" id="pvDiff"></div>
+
+        <div class="traj">
+          <div class="traj-head"><b>매달 250만 원씩 넣으면</b><span>수익 0% 가정</span></div>
+          <div class="traj-res" id="trajRes"><span>1억 원까지</span><b>15개월 뒤 <em>2028년 2월경</em></b></div>
+          <svg id="traj" viewBox="0 0 320 138" role="img" aria-label="지금 6,328만 원에서 매달 250만 원씩 넣으면 15개월 뒤 1억 원을 넘는 궤적 그래프"></svg>
+          <div class="traj-cap" id="trajCap"></div>
+        </div>
+      </div>
+
+      <div class="sect"><h2>세금 아끼는 통장 한도</h2><span class="hint">2026년 · 3개 다 채움</span></div>
+      <div class="card">
+        <p class="gauge-intro">세금을 돌려받는 통장이에요. 2026년 한도를 세 개 다 채워서 올해는 더 넣을 자리가 없어요.</p>
+        <div class="gr">
+          <div class="gr-top"><b>연금저축</b><span class="chip ok">한도 꽉 참</span></div>
+          <div class="gr-track"><i style="width:100%;background:linear-gradient(90deg,#3f74e6,#7fb0ff)"></i></div>
+          <div class="gr-foot"><span>600만 / 600만 원</span><em>100%</em></div>
+        </div>
+        <div class="gr">
+          <div class="gr-top"><b>개인형 IRP</b><span class="chip ok">한도 꽉 참</span></div>
+          <div class="gr-track"><i style="width:100%;background:linear-gradient(90deg,#7a5be0,#a875ff)"></i></div>
+          <div class="gr-foot"><span>300만 / 300만 원</span><em>100%</em></div>
+        </div>
+        <div class="gr">
+          <div class="gr-top"><b>ISA</b><span class="chip ok">한도 꽉 참</span></div>
+          <div class="gr-track"><i style="width:100%;background:linear-gradient(90deg,#1fa985,#3ddcb0)"></i></div>
+          <div class="gr-foot"><span>2,000만 / 2,000만 원</span><em>100%</em></div>
+        </div>
+        <div class="gauge-note">12월엔 <b>일반계좌에서 미국 직투(VOO·QQQM)</b>, 1월에 새 한도가 열리면 <b>다시 여기부터</b>!</div>
+        <p class="gauge-sub">* 한도와 세액공제는 해마다 조금씩 바뀌어요. 연말에 한 번 더 확인해요.</p>
+      </div>
+
       <div class="sect"><h2>자산군 비중</h2><span class="hint"><b>현재</b> → 목표</span></div>
       <div id="weights"></div>
 
@@ -420,6 +546,7 @@
       <div class="sect"><h2>부족한 곳에 이렇게 나눠요</h2><span class="hint">목표 1억 기준</span></div>
       <div class="alloc-total"><span>배분 합계</span><b class="num" id="allocSum">2,500,000원</b></div>
       <div class="alloc" id="allocList"></div>
+      <div class="why"><b>왜 이렇게 나누나요?</b> 목표 비중에서 <em>모자란 곳에만</em> 이번 달 돈을 넣으면, 팔지 않고도 비중이 저절로 목표 쪽으로 돌아오기 때문이에요. 그래서 이미 넘친 한국주식은 0원!</div>
 
       <div class="sect"><h2>어느 계좌부터 살까</h2><span class="hint">위에서부터</span></div>
       <div class="card steps">
@@ -438,6 +565,17 @@
       <div class="accbar" id="accbar"></div>
       <div id="accounts"></div>
       <div class="card totalcard" id="accTotal" style="margin-top:11px"></div>
+
+      <div class="sect"><h2>올해 받은 배당·분배금</h2><span class="hint">2026년 1~10월</span></div>
+      <div class="card">
+        <div class="dvgrid">
+          <div><span>배당·분배금</span><b class="num pos">35만 9,782원</b><i>+ 17.83달러</i></div>
+          <div><span>수수료 + 세금</span><b class="num">39만 334원</b><i>올해 나간 비용</i></div>
+        </div>
+        <div class="dvbar"><i id="dvFill" style="width:92.2%"></i></div>
+        <div class="dvfoot">배당이 올해 비용의 <b id="dvPct">92%</b>를 메웠어요 · 남은 차이는 <b id="dvGap">3만 552원</b></div>
+        <div class="dvfoot" style="color:var(--muted2)">가만히 들고만 있어도 1년치 수수료·세금이 거의 정리된 셈이에요.</div>
+      </div>
       <p class="note">계좌번호와 실명은 넣지 않았어요. 종목 수익률은 11/24 M-STOCK 화면 기준이고, 연금저축·IRP는 계좌 단위 수익률만 표시했어요.</p>
     </section>
 
@@ -464,6 +602,36 @@
         <div class="pr"><div class="no">1</div><div class="tx"><b>사기 전에 팔 때를 정한다</b><p>손절 −8~10%, 목표 +15~20%, 최소 3개월 보유. 손실 상위 3건은 모두 3~5주 안에 판 매매였어요.</p></div></div>
         <div class="pr"><div class="no">2</div><div class="tx"><b>한 종목 20%, 한 섹터 30% 상한</b><p>지금 국내 반도체가 종합계좌의 38%. 넘으면 다음 달 적립으로 눌러 담아요.</p></div></div>
         <div class="pr"><div class="no">3</div><div class="tx"><b>매매는 정한 날에만</b><p>매월 첫 영업일 한 번. 3월 74건·5월 45건이 성과를 깎았고, 8월 이후 줄이자 손실도 멈췄어요.</p></div></div>
+      </div>
+
+      <div class="sect"><h2>상훈님 장기투자 점검 체크리스트</h2><span class="hint">직접 눌러서 체크</span></div>
+      <div class="card">
+        <div class="chk-bar">
+          <div class="cp"><i id="chkFill" style="width:0%"></i></div>
+          <b class="num" id="chkCount">0 / 3</b>
+        </div>
+        <label class="chk-item">
+          <input type="checkbox" class="chk" data-k="m1">
+          <span class="box"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+          <span class="tx"><em>월 1회</em><b>정한 날에 계산기 비율대로, 흔들리지 않고 매수하기</b></span>
+        </label>
+        <label class="chk-item">
+          <input type="checkbox" class="chk" data-k="q1">
+          <span class="box"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+          <span class="tx"><em>분기 1회</em><b>한 종목 20% · 한 섹터(반도체) 30%를 넘지 않았는지 확인</b></span>
+        </label>
+        <label class="chk-item">
+          <input type="checkbox" class="chk" data-k="y1">
+          <span class="box"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+          <span class="tx"><em>연말·연초</em><b>연금·IRP 900만 · ISA 2,000만 새 한도와 IRP 안전자산 30% 확인</b></span>
+        </label>
+      </div>
+      <button class="reset" id="chkReset">체크 초기화</button>
+      <div class="chk-note">체크 상태는 이 브라우저에만 저장돼요</div>
+
+      <div class="mind">
+        <span class="tg">마음가짐</span>
+        <p><b>−10~20% 하락은 매년 오는 정상 흔들림</b>이에요. 팔지 않으면 손실이 확정되지 않아요.</p>
       </div>
 
       <p class="note">가장 잘한 매매 <b>리노공업 +53만 4,500원</b> · 가장 아쉬운 매매 <b>두산에너빌리티 −88만 원</b> · 미국 개별주 6개월 보유는 −133달러로 마무리했어요.<br>실현손익은 체결가 기준 근사치라 증권사 앱의 확정 손익과 몇만 원 차이가 날 수 있어요.</p>
@@ -584,9 +752,12 @@ const DATA = {
       {n:'원화 예치금',    cls:'safe',   v:763,    r:0}
     ]}
   ],
-  review: {
+    review: {
     months: [8,27,74,37,45,22,44,12,4,8],
-    labels: ['1','2','3','4','5','6','7','8','9','10']
+    labels: ['1','2','3','4','5','6','7','8','9','10'],
+    dividend: 359782,
+    usdDividend: 17.83,
+    fees: 390334
   }
 };
 
@@ -808,6 +979,117 @@ $('#amtChips').addEventListener('click', e => {
       <div class="bb" style="height:${Math.max(4, v/max*78)}%"></div>
       <span class="bl">${DATA.review.labels[i]}</span>
     </div>`).join('');
+})();
+
+/* ────────────────────────────
+   v2 · 누적 원금 vs 현재 자산 · 1억 궤적
+   ──────────────────────────── */
+(function principalTrajectory(){
+  const cost = totalCost, ev = totalEval, gap = cost - ev;
+  const rate = totalLoss / totalCost * 100;
+  $('#pvCost').textContent = man(cost) + ' 원';
+  $('#pvEval').textContent = man(ev) + ' 원';
+  $('#pvEvalBar').style.width = Math.max(0, Math.min(100, ev / cost * 100)).toFixed(1) + '%';
+  $('#pvDiff').innerHTML = gap > 0
+    ? `넣은 돈보다 <b class="neg">${man(gap)} 원 적어요</b> (${pct(rate)}) — 지금은 평가손실 구간이에요. 팔기 전까지는 확정된 손실이 아니에요.`
+    : `넣은 돈보다 <b class="pos">${man(-gap)} 원 많아요</b> (${pct(rate)}) — 평가이익이 난 상태예요.`;
+
+  const monthlyAmt = DATA.monthlyDefault;
+  const step = monthlyAmt / 10000;                  // 만 원 단위
+  const cur  = ev / 10000;                          // 6,328만
+  const goal = DATA.goal / 10000;                   // 10,000만 (=1억)
+  const need = Math.ceil((goal - cur) / step);      // 15개월
+
+  const start = new Date(2026, 10, 24);             // 데이터 기준일 2026-11-24
+  const goalDay = new Date(start.getFullYear(), start.getMonth() + need, start.getDate());
+  $('#trajRes').innerHTML = `<span>1억 원까지</span><b>${need}개월 뒤 <em>${goalDay.getFullYear()}년 ${goalDay.getMonth()+1}월경</em></b>`;
+  $('#trajCap').textContent = `매달 ${man(monthlyAmt)} 원을 넣는 것만으로 계산했어요. 수익이 붙으면 더 빨라지고, 하락하면 늦어져요.`;
+
+  /* 궤적 그래프 (SVG) */
+  const xMax = need + 3;                            // 18개월까지
+  const yMin = 5000, yMax = 11500;                  // 만 원
+  const L = 12, R = 298, T = 10, B = 104;
+  const X = m => L + (m / xMax) * (R - L);
+  const Y = v => B - ((v - yMin) / (yMax - yMin)) * (B - T);
+  const at = m => cur + step * m;
+
+  let dLine = '';
+  for (let m = 0; m <= xMax; m++) dLine += `${m ? 'L' : 'M'}${X(m).toFixed(1)} ${Y(at(m)).toFixed(1)}`;
+  const dArea = `${dLine} L${X(xMax).toFixed(1)} ${B} L${L} ${B} Z`;
+  const gx = X(need), gy = Y(goal);
+
+  const grid = [[8000,'8,000만'],[10000,'1억']].map(([v, l]) => {
+    const y = Y(v), isGoal = v === 10000;
+    return `<line x1="${L}" y1="${y.toFixed(1)}" x2="${R}" y2="${y.toFixed(1)}" stroke="${isGoal ? 'rgba(91,141,255,.55)' : 'rgba(255,255,255,.07)'}" stroke-width="1"${isGoal ? ' stroke-dasharray="4 4"' : ''}/>`
+      + `<text x="${L + 3}" y="${(y - 5).toFixed(1)}" font-size="7.5" font-weight="700" fill="${isGoal ? '#a9c2ff' : '#687083'}">${l}</text>`;
+  }).join('');
+
+  const xlab = [[0,'지금'],[6,'6개월'],[12,'12개월'],[xMax,xMax + '개월']].map(([m, l]) =>
+    `<text x="${X(m).toFixed(1)}" y="122" text-anchor="${m === 0 ? 'start' : m === xMax ? 'end' : 'middle'}" font-size="7.5" font-weight="600" fill="#687083">${l}</text>`).join('');
+
+  $('#traj').innerHTML = `
+    <defs>
+      <linearGradient id="trajFill" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#5b8dff" stop-opacity=".34"/>
+        <stop offset="1" stop-color="#5b8dff" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="trajLine" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#2fd3a4"/>
+        <stop offset="1" stop-color="#7fb0ff"/>
+      </linearGradient>
+    </defs>
+    ${grid}
+    <path d="${dArea}" fill="url(#trajFill)"/>
+    <line x1="${gx.toFixed(1)}" y1="${gy.toFixed(1)}" x2="${gx.toFixed(1)}" y2="${B}" stroke="rgba(255,255,255,.16)" stroke-width="1" stroke-dasharray="3 3"/>
+    <path d="${dLine}" fill="none" stroke="url(#trajLine)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="${L}" cy="${Y(cur).toFixed(1)}" r="3.2" fill="#0a0c11" stroke="#2fd3a4" stroke-width="2"/>
+    <circle cx="${gx.toFixed(1)}" cy="${gy.toFixed(1)}" r="4" fill="#fff" stroke="#5b8dff" stroke-width="2"/>
+    <text x="${gx.toFixed(1)}" y="${(gy - 9).toFixed(1)}" text-anchor="middle" font-size="8" font-weight="800" fill="#dbe6ff">${need}개월 뒤 1억</text>
+    ${xlab}`;
+})();
+
+/* ────────────────────────────
+   v2 · 올해 배당이 비용을 얼마나 메웠나
+   ──────────────────────────── */
+(function dividendCard(){
+  const R = DATA.review, ratio = Math.min(100, R.dividend / R.fees * 100);
+  $('#dvFill').style.width = ratio.toFixed(1) + '%';
+  $('#dvPct').textContent = Math.round(ratio) + '%';
+  $('#dvGap').textContent = fmt(Math.max(0, R.fees - R.dividend)) + '원';
+})();
+
+/* ────────────────────────────
+   v2 · 장기투자 점검 체크리스트 (localStorage)
+   ──────────────────────────── */
+(function checklist(){
+  const KEY = 'pf_chk_v1';
+  const boxes = Array.from(document.querySelectorAll('.chk-item input[data-k]'));
+  let state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ state = {}; }
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} };
+
+  function paint(){
+    let n = 0;
+    boxes.forEach(b => {
+      const on = !!state[b.dataset.k];
+      b.checked = on;
+      if (on) n++;
+    });
+    $('#chkCount').textContent = n + ' / ' + boxes.length;
+    $('#chkFill').style.width = (n / boxes.length * 100) + '%';
+  }
+
+  boxes.forEach(b => b.addEventListener('change', () => {
+    state[b.dataset.k] = b.checked;
+    save(); paint();
+    if (boxes.every(x => x.checked)) toast('이번 점검은 다 하셨어요. 다음 점검 때 또 만나요!');
+  }));
+
+  $('#chkReset').addEventListener('click', () => {
+    state = {}; save(); paint(); toast('체크를 모두 지웠어요');
+  });
+
+  paint();
 })();
 
 /* ── 탭 ── */
