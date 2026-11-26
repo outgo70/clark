@@ -447,6 +447,10 @@
   #stage .shint .hk{font-size:15px;font-weight:900;letter-spacing:-.03em;line-height:1.34;color:#F0FAF4;word-break:keep-all}
   #stage .shint .hd{font-size:13.5px;font-weight:800;color:#8FBBA4;letter-spacing:-.02em;line-height:1.34;word-break:keep-all}
 
+  #stage .wtip{display:none}
+  #stage.wit .wtip{display:block;flex:1 1 auto;min-width:0;align-self:center;text-align:center;
+    font-size:12.5px;font-weight:800;line-height:1.32;letter-spacing:-.2px;color:rgba(214,238,224,.44);
+    word-break:keep-all;overflow:hidden;max-height:2.7em;padding:0 2px;-webkit-user-select:none;user-select:none}
   #stage .sctrl{flex:0 0 auto;display:grid;grid-template-columns:1fr 1.3fr;gap:9px;
     padding:7px 12px calc(9px + env(safe-area-inset-bottom));background:rgba(3,16,11,.72);border-top:1px solid rgba(255,255,255,.1)}
   #stage .sctrl button{font:inherit;font-size:19px;font-weight:900;letter-spacing:-.04em;min-height:58px;border-radius:16px;cursor:pointer}
@@ -557,6 +561,7 @@
   <div class="shint" id="sHint"></div>
   <div class="sctrl">
     <button id="sPrev">◀ 이전</button>
+    <span id="sWitTip" class="wtip" aria-hidden="true"></span>
     <button id="sNext">다음 ▶</button>
   </div>
 </div>
@@ -1304,48 +1309,48 @@
      ============================================================ */
   var SCENES = [
     /* ── 1단계 만남 ── */
-    { s: 1, type: 'card', art: 'plain', k: '인사 · 아이 이름 묻기', d: '“안녕! 친구야, 안녕~” · “이름이 뭐니?”' },
-    { s: 1, type: 'card', art: 'plain', k: '소속·이름 소개 → 허락받기', d: '“혹시 이런 딱지 본 적 있니?” → “잠시 시간 되니?”' },
+    { s: 1, type: 'card', art: 'plain', k: '인사 → 아이 이름 묻기', d: '“안녕! 친구야, 안녕~” 밝게 · “이름이 뭐니?”', w: '인사 · 이름 묻기' },
+    { s: 1, type: 'card', art: 'plain', k: '소속·이름 소개 → “잠시 시간 되니?”', d: '“{church}에서 나온 {teacherLabel}인데, 이런 딱지 본 적 있니?” → 허락받고 딱지 꺼내기', w: '소개 · “시간 되니?”' },
     /* ── 2단계 하나님 ── */
-    { s: 2, type: 'card', art: 'circle', k: '노란 원 → 하나님', d: '모든 자연을 만드신 분 · 잔디·나무·하늘·해·달·별' },
-    { s: 2, type: 'card', art: 'circle', k: '부모님 통해 태어나게 · 사랑', d: '“만드셨으니 너무너무 사랑하셔”' },
-    { s: 2, type: 'verse', v: 'v1', k: '📖 함께 읽기', d: '하나님이 얼마나 사랑하시는지 — 소리 내어 함께' },
-    { s: 2, type: 'card', art: 'circle', k: '하늘나라 초청', d: '❓ “하늘나라에서 살고 싶지 않니?” → 대답을 꼭 듣기' },
+    { s: 2, type: 'card', art: 'circle', k: '노란 원 = 하나님 (만드신 분)', d: '잔디·나무·하늘·해·달·별·온 우주를 만드신 분', w: '노란 원 = 하나님' },
+    { s: 2, type: 'card', art: 'circle', k: '부모님 통해 태어나게 · 사랑', d: '“만드셨으니 너무너무 사랑하셔”', w: '만드셨으니 사랑' },
+    { s: 2, type: 'verse', v: 'v1', k: '📖 요 3:16 — 하나님이 나를 사랑하심', d: '함께 소리 내어 읽고 “하나님이 우리 친구를 이처럼 사랑하셔” 짚어 주기', w: '요 3:16 사랑' },
+    { s: 2, type: 'card', art: 'circle', k: '하늘나라 초청 — 대답을 꼭 듣기', d: '“하늘나라에서 살고 싶지 않니?” → “살고 싶어요” 들은 뒤 다음으로', w: '하늘나라 초청' },
     /* ── 3단계 죄 ── */
-    { s: 3, type: 'card', art: 'heartB', k: '검은 하트 = 죄', d: '죄 때문에 어두워진 마음 · 겁주지 않기' },
-    { s: 3, type: 'card', art: 'heartB', k: '죄 = 말 · 생각 · 행동', d: '거짓말 · 욕 · 미워하기 · 불순종 · 싸우기' },
-    { s: 3, type: 'verse', v: 'v2', k: '📖 함께 읽기', d: '“모든 사람” = 선생님도, 나도 — 함께 읽기' },
-    { s: 3, type: 'card', art: 'heartB', k: '❓ “혹시 죄가 있니?”', d: '대신 말해 주지 말고 기다린 뒤 “맞아, 우리는 그래”' },
-    { s: 3, type: 'card', art: 'heartB', k: '죄의 벌 = 지옥', d: '하나님과 가장 멀리 · 영원히' },
+    { s: 3, type: 'card', art: 'heartB', k: '검은 하트 = 죄 (어두워진 마음)', d: '“하나님과 멀어지게 하는 것 = 죄” · 겁주지 말고 담담하게', w: '검은 하트 = 죄' },
+    { s: 3, type: 'card', art: 'heartB', k: '죄 = 말 · 생각 · 행동', d: '거짓말 · 욕 · 미워하기 · 불순종 · 싸우기 — 이런 것이 다 죄', w: '죄 = 말·생각·행동' },
+    { s: 3, type: 'verse', v: 'v2', k: '📖 롬 3:23 — “모든 사람”이 죄인', d: '함께 읽고 “모든 사람 = 선생님도, 우리 친구도” 짚어 주기', w: '롬 3:23 모두 죄인' },
+    { s: 3, type: 'card', art: 'heartB', k: '“혹시 죄가 있니?” — 기다리기', d: '대신 말해 주지 말고 아이가 말할 때까지 기다린 뒤 “맞아, 우리는 그래”', w: '“혹시 죄가 있니?”' },
+    { s: 3, type: 'card', art: 'heartB', k: '죄의 벌 = 지옥 (영원히)', d: '하나님과 가장 멀리 떨어진 곳에서 영원히 — 분명하게', w: '죄의 벌 = 지옥' },
     /* ── 4단계 예수님 ── */
-    { s: 4, type: 'card', art: 'cross', k: '“하지만!” → 붉은 십자가 = 예수님', d: '죄 없으신 하나님의 아들 · 목소리를 밝게' },
-    { s: 4, type: 'card', art: 'cross', k: '내 벌을 대신 받으심', d: '십자가 벌 · 모든 피를 흘리심' },
-    { s: 4, type: 'verse', v: 'v3', k: '📖 함께 읽기', d: '죄가 용서받으려면 피가 흘러야 해' },
-    { s: 4, type: 'verse', v: 'v4', k: '📖 사흘 만에 다시 살아나사', d: '사흘 = 3일 · 손가락으로 세어 보여 주기' },
-    { s: 4, type: 'card', art: 'cross', k: '지금도 나를 위해 기도하심', d: '천국에서 우리 친구를 위해 기도하고 계셔' },
+    { s: 4, type: 'card', art: 'cross', k: '“하지만!” → 붉은 십자가 = 예수님', d: '목소리를 밝게 · 죄 없으신 하나님의 아들', w: '“하지만!” 붉은 십자가' },
+    { s: 4, type: 'card', art: 'cross', k: '예수님이 내 벌을 대신 받으심', d: '죄인들이 받을 십자가 벌 · 모든 피를 흘리심', w: '내 벌을 대신' },
+    { s: 4, type: 'verse', v: 'v3', k: '📖 히 9:22 — 피 흘림이 없으면 사함도 없다', d: '함께 읽고 “예수님이 흘리신 피가 내 죄의 값”이라고 짚기', w: '히 9:22 피 흘림' },
+    { s: 4, type: 'verse', v: 'v4', k: '📖 고전 15:3~5 — 사흘 만에 부활', d: '함께 읽고 손가락으로 “하루·이틀·사흘 = 3일” 세어 보이기', w: '사흘 만에 부활' },
+    { s: 4, type: 'card', art: 'cross', k: '지금 천국에서 나를 위해 기도', d: '“예수님은 지금 천국에서 우리 친구를 위해 기도하고 계셔”', w: '지금도 위해 기도' },
     /* ── 5단계 초청 ── */
-    { s: 5, type: 'verse', v: 'v5', k: '📖 함께 읽기', d: '“영접하는 자에게 자녀가 되는 권세”' },
-    { s: 5, type: 'card', art: 'cross', k: '영접 = 죄 인정 + 믿음 + 모심', d: '❓ “예수님을 마음에 믿고 싶니?” → 대답 듣기' },
-    { s: 5, type: 'list', kind: 'q', k: '❓ 확인 질문 4가지', d: '정답을 대신 말하지 말고 한 번 더 생각하게' },
-    { s: 5, type: 'prayer', p: 0, k: '🙏 영접기도 1단계 · 따라 읽기', d: '선생님이 한 마디 → 아이가 따라 읽기' },
-    { s: 5, type: 'prayer', p: 1, k: '🙏 영접기도 2단계 · 아이가 직접', d: '눈 감는 이유도 설명해 주기' },
-    { s: 5, type: 'verse', v: 'v6', k: '📖 이름 넣어 읽기', d: '‘자’ 자리에 아이 이름을 넣어 함께' },
-    { s: 5, type: 'card', art: 'plain', k: '🎉 하나님의 자녀가 되었어', d: '“축하해, {name:아}!”' },
+    { s: 5, type: 'verse', v: 'v5', k: '📖 요 1:12 — 영접하면 하나님의 자녀', d: '함께 읽고 영접 = 죄 인정 + 믿음 + 마음에 모시기', w: '요 1:12 영접' },
+    { s: 5, type: 'card', art: 'cross', k: '“마음에 믿고 싶니?” — 대답 듣기', d: '“예수님을 마음에 믿고 싶니?” → “네, 믿고 싶어요” 들은 뒤 질문으로', w: '“믿고 싶니?”' },
+    { s: 5, type: 'list', kind: 'q', k: '❓ 확인 질문 4가지 (+1)', d: '①하나님은 어떤 분 ②왜 믿어야 ③벌은 무엇 ④예수님이 하신 일 ＋어떻게 용서받지', w: '확인 질문 4가지' },
+    { s: 5, type: 'prayer', p: 0, k: '🙏 영접기도 1단계 — 한 마디씩 따라', d: '선생님이 6마디 읽고 아이가 따라 · 한 번 더 반복', w: '영접기도 1단계' },
+    { s: 5, type: 'prayer', p: 1, k: '🙏 영접기도 2단계 — 아이가 직접', d: '눈 감는 이유 설명 · 아이 말로 달라져도 끝까지 기다리기', w: '영접기도 2단계' },
+    { s: 5, type: 'verse', v: 'v6', k: '📖 요 1:12 — 이름 넣어 읽기', d: '‘자’ 자리에 아이 이름을 넣어 함께 읽고 “하나님의 자녀가 되었어”', w: '이름 넣어 요 1:12' },
+    { s: 5, type: 'card', art: 'plain', k: '🎉 “축하해!” — 자녀가 된 확신', d: '“믿는 그 순간 죄 용서 · 하나님의 자녀” 축하 인사', w: '“축하해!” 자녀 됨' },
     /* ── 6단계 확신 ── */
-    { s: 6, type: 'card', art: 'heartW', k: '흰 하트 = 구원의 확신', d: '천국 가는 그날까지 자녀로 살아가' },
-    { s: 6, type: 'verse', v: 'v7', k: '📖 함께 읽기', d: '“결코 버리지 아니하고 떠나지 않으리라”' },
-    { s: 6, type: 'hands', k: '✋ 다섯 손가락 약속', d: '손 펴서 같이 · 손 바꿔 한 번 더' },
-    { s: 6, type: 'verse', v: 'v8', k: '📖 자백 → 용서', d: '자백 = 하나님께 솔직하게 말씀드리기' },
-    { s: 6, type: 'card', art: 'heartW', k: '다시 죄 지으면? 자백', d: '“하나님, 죄송해요. 용서해 주세요”' },
+    { s: 6, type: 'card', art: 'heartW', k: '흰 하트 = 구원의 확신', d: '“천국 가는 그날까지 하나님의 자녀로 살아가”', w: '흰 하트 = 확신' },
+    { s: 6, type: 'verse', v: 'v7', k: '📖 히 13:5~6 — 결코 떠나지 않으신다', d: '함께 읽고 “다시 죄를 지어도 예수님은 떠나지 않으셔”', w: '결코 떠나지 않으심' },
+    { s: 6, type: 'hands', k: '✋ 다섯 손가락 약속', d: '손 펴서 “절대 떠나지 않으신다” → 손 바꿔 “옳은 일 돕는 분”', w: '다섯 손가락 약속' },
+    { s: 6, type: 'verse', v: 'v8', k: '📖 요일 1:9 — 자백하면 용서', d: '함께 읽고 자백 = 하나님께 솔직하게 말씀드리기', w: '요일 1:9 자백' },
+    { s: 6, type: 'card', art: 'heartW', k: '다시 죄 지으면? → 자백', d: '“하나님, 죄송해요. 용서해 주세요” — 떠나지 않으심 + 자백', w: '다시 죄 → 자백' },
     /* ── 7단계 성장 ── */
-    { s: 7, type: 'card', art: 'green', k: '초록 = 자라남', d: '예수님을 더 알아가고 자라요' },
-    { s: 7, type: 'verse', v: 'v9', k: '📖 함께 읽기', d: '풀과 나무처럼 자라 가라' },
-    { s: 7, type: 'list', kind: 'g', k: '🌱 자라는 4가지', d: '예배 · 말씀과 기도 · 순종 · 전하기' },
-    { s: 7, type: 'card', art: 'green', k: '부모님 허락 → 어린이 예배', d: '“성경책 있니?” · 4번 나오면 성경 선물' },
+    { s: 7, type: 'card', art: 'green', k: '초록 = 자라남', d: '“예수님을 더 알아가고 풀·나무처럼 자라요”', w: '초록 = 자라남' },
+    { s: 7, type: 'verse', v: 'v9', k: '📖 벧후 3:18 — 은혜와 지식에서 자라 가라', d: '함께 읽고 “우리 친구도 자랄 수 있어”', w: '벧후 3:18 자라 가라' },
+    { s: 7, type: 'list', kind: 'g', k: '🌱 자라는 4가지', d: '①교회 예배 ②성경·기도(하나님과 대화) ③말씀대로 순종 ④친구·가족에게 전하기', w: '자라남 · 예배·말씀·기도·순종·전도' },
+    { s: 7, type: 'card', art: 'green', k: '부모님 허락 → 어린이 예배', d: '학년 묻고 예배 시간 안내 · “성경책 있니? 4번 나오면 성경 선물”', w: '부모님 허락 → 예배' },
     /* ── 8단계 마무리 ── */
-    { s: 8, type: 'card', art: 'green', k: '❓ “오늘 어떤 게 가장 감사하니?”', d: '아이 감사기도를 끝까지 듣기' },
-    { s: 8, type: 'prayer', p: 2, k: '🙏 축복기도', d: '아이 이름을 넣어 한 문장씩 천천히' },
-    { s: 8, type: 'cardmsg', k: '교회·이름 카드 건네기', d: '“부모님께 꼭 보여 드리세요” · “안녕!”' }
+    { s: 8, type: 'card', art: 'green', k: '“오늘 어떤 게 가장 감사하니?”', d: '아이 감사기도를 끝까지 듣고 “잘했어”', w: '“가장 감사한 것?”' },
+    { s: 8, type: 'prayer', p: 2, k: '🙏 축복기도 — 이름 넣어 한 문장씩', d: '천국 가는 그날까지 좋은 친구·선생님 · 전하는 자녀로 자라게', w: '축복기도' },
+    { s: 8, type: 'cardmsg', k: '교회·이름 카드 건네고 인사', d: '“부모님께 꼭 보여 드리세요” · “어린이 예배에서 만나요”', w: '카드 건네고 인사' },
   ];
 
   var SPRAYERS = [
@@ -1393,9 +1398,7 @@
     else if (kind === 'heartB') icon = '<path d="' + HEART_D + '" fill="#161616"/>';
     else if (kind === 'heartW') icon = '<path d="' + HEART_D + '" fill="#FFFFFF"/>';
     else if (kind === 'cross') icon = '<g fill="#E23B2E"><rect x="176" y="62" width="48" height="272" rx="5"/><rect x="104" y="148" width="192" height="48" rx="5"/></g>';
-    else if (kind === 'green') icon = '<g fill="#FFFFFF"><path d="M200 302 C200 262 200 224 200 190" fill="none" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round"/>'
-      + '<path d="M200 216 C200 174 168 148 130 148 C130 192 164 216 200 216 Z"/>'
-      + '<path d="M200 188 C200 152 228 128 262 128 C262 166 234 188 200 188 Z" fill-opacity=".92"/></g>';
+    /* 초록 딱지는 그림 없이 민무늬 녹색 장 (2026-11-26 상훈님 요청) */
     return '<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="복음딱지 그림">'
       + '<rect x="0" y="0" width="400" height="400" rx="20" fill="#009E60"/>'
       + '<line x1="200" y1="12" x2="200" y2="388" stroke="#0A6B41" stroke-opacity=".30" stroke-width="2"/>'
@@ -1448,7 +1451,7 @@
   var stageEl = $('stage'), sMain = $('sMain'), cardStage = $('cardStage'), card3d = $('card3d'),
       panelWrap = $('panelWrap'), sHint = $('sHint'), sPos = $('sPos'), sStepLbl = $('sStepLbl'),
       sWitB = $('sWit'), sExitB = $('sExit'),
-      sPrevB = $('sPrev'), sNextB = $('sNext'), sProgBar = $('sProg');
+      sPrevB = $('sPrev'), sNextB = $('sNext'), sProgBar = $('sProg'), sWitTip = $('sWitTip');
   var stageState = { open: false, i: 0, busy: false, wit: false };
   var stageFrom = 'here';
 
@@ -1461,6 +1464,7 @@
     sNextB.disabled = stageState.i === SCENES.length - 1;
     sNextB.textContent = stageState.i === SCENES.length - 1 ? '마침 ✕' : '다음 ▶';
     sHint.innerHTML = '<div class="hk">' + fill(sc.k) + '</div>' + (sc.d ? '<div class="hd">' + fill(sc.d) + '</div>' : '');
+    sWitTip.textContent = plainFill(sc.w || sc.k);
     if (st.num - 1 !== idx) { idx = st.num - 1; state.idx = idx; save(); renderChips(); }
   }
 
@@ -1559,7 +1563,8 @@
     if (opts.from !== 'first') {
       for (var i = 0; i < SCENES.length; i++) { if (SCENES[i].s === STEPS[idx].num) { target = i; break; } }
     }
-    if (opts.wit !== undefined) { state.wit = opts.wit ? 1 : 0; save(); }
+    /* 실전 연습 진입은 기본이 ‘힌트 보임’ · ‘힌트 가리고 전도하기’로 들어올 때만 숨김 */
+    state.wit = opts.wit ? 1 : 0; save();
     stageState.open = true;
     stageEl.classList.add('open');
     stageEl.setAttribute('aria-hidden', 'false');
