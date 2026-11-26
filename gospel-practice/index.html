@@ -341,6 +341,138 @@
     padding:12px 18px;border-radius:14px;opacity:0;pointer-events:none;transition:.22s ease;max-width:330px;text-align:center;
   }
   #toast.on{opacity:1;transform:translate(-50%,0)}
+
+  /* ---------- 실전 연습 시작 상자 ---------- */
+  .rehbox{background:linear-gradient(160deg,#2F8A55,#18563A);border-radius:18px;padding:12px 12px 10px;margin:0 0 12px;box-shadow:0 6px 18px rgba(24,86,58,.28)}
+  .bigstart{width:100%;font:inherit;font-size:19.5px;font-weight:900;letter-spacing:-.6px;color:#1B5236;
+    background:linear-gradient(180deg,#FFF6D8,#FFE29A);border:0;border-radius:14px;min-height:54px;cursor:pointer;
+    box-shadow:0 4px 12px rgba(0,0,0,.2)}
+  .bigstart:active{transform:scale(.99)}
+  .bigstart .em{font-size:1.05em}
+  .seg{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+  .seg button{font:inherit;font-size:15.5px;font-weight:900;letter-spacing:-.4px;color:#E8FFF1;
+    background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.32);border-radius:12px;min-height:48px;cursor:pointer}
+  .seg button.on{background:#fff;color:#1B5234;border-color:#fff}
+  .rehline{margin:8px 0 0;font-size:14.5px;font-weight:800;color:#D6F0E1;letter-spacing:-.2px;text-align:center}
+  .rehline b{color:#fff}
+  .bigwit{width:100%;margin-top:8px;font:inherit;font-size:16.5px;font-weight:900;letter-spacing:-.5px;color:#fff;
+    background:rgba(0,0,0,.22);border:1.5px solid rgba(255,255,255,.42);border-radius:13px;min-height:48px;cursor:pointer}
+  .rehn{margin:8px 0 0;font-size:13.5px;font-weight:800;color:#CDEADA;letter-spacing:-.2px;line-height:1.45;word-break:keep-all}
+  .rehn b{color:#fff}
+
+  /* ---------- 실전 연습 전체화면 (#stage) ---------- */
+  #stage{position:fixed;inset:0;z-index:999;display:none;flex-direction:column;
+    background:radial-gradient(125% 78% at 50% 5%,#1A4B34 0%,#0C271E 52%,#04120D 100%);
+    color:#fff;-webkit-user-select:none;user-select:none}
+  #stage.open{display:flex}
+  #stage .sbar{flex:0 0 auto;display:flex;align-items:center;gap:7px;min-height:46px;
+    padding:calc(5px + env(safe-area-inset-top)) 10px 5px;background:rgba(3,16,11,.6);
+    border-bottom:1px solid rgba(255,255,255,.1)}
+  #stage .stime{font:inherit;font-size:16px;font-weight:900;color:#EAF7EE;background:rgba(255,255,255,.13);
+    border:1px solid rgba(255,255,255,.22);border-radius:11px;padding:0 9px;min-height:40px;cursor:pointer;
+    display:flex;align-items:center;gap:4px;letter-spacing:-.2px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  #stage .stime.on{background:#2F8A55;border-color:#2F8A55;color:#fff}
+  #stage .spos{margin-right:auto;min-width:0;display:flex;align-items:baseline;gap:6px;line-height:1.14}
+  #stage .spos b{font-size:14px;font-weight:900;letter-spacing:-.2px;white-space:nowrap;font-variant-numeric:tabular-nums;color:#fff}
+  #stage .spos span{font-size:11.5px;font-weight:800;color:#9FC4B0;letter-spacing:-.2px;white-space:nowrap;
+    max-width:100%;overflow:hidden;text-overflow:ellipsis}
+  #stage .swit{font:inherit;font-size:13px;font-weight:900;color:#DCEFE3;background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.24);border-radius:11px;padding:0 8px;min-height:40px;cursor:pointer;white-space:nowrap;letter-spacing:-.3px}
+  #stage .sexit{font:inherit;font-size:13px;font-weight:900;color:#fff;background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.24);border-radius:11px;padding:0 9px;min-height:40px;cursor:pointer;white-space:nowrap}
+  #stage .sprog{flex:0 0 auto;height:3px;background:rgba(255,255,255,.12)}
+  #stage .sprog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#7ED39B,#2F8A55);transition:width .25s ease}
+  #stage .smain{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;padding:8px 14px 6px}
+  #stage .cardstage{width:100%;height:100%;display:flex;align-items:center;justify-content:center;perspective:1200px}
+  #stage .cardstage[hidden]{display:none}
+  #stage .card3d{width:min(calc(100vw - 26px),60vh,460px);aspect-ratio:1/1;will-change:transform;
+    filter:drop-shadow(0 18px 34px rgba(0,0,0,.5))}
+  #stage .card3d svg{display:block;width:100%;height:100%;border-radius:20px}
+  #stage .panelwrap{width:100%;height:100%;min-height:0;display:flex;align-items:center;justify-content:center}
+  #stage .panelwrap[hidden]{display:none}
+
+  #stage .vpanel{width:100%;max-width:420px;max-height:100%;overflow:auto;border-radius:22px;padding:20px 16px;text-align:center;
+    font-size:25px;background:linear-gradient(168deg,var(--vb,#14332A),#06110D 92%);border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 16px 40px rgba(0,0,0,.45);animation:popIn .26s cubic-bezier(.2,.8,.3,1) both}
+  #stage.wit .vpanel{font-size:28px}
+  #stage .vpanel .vtag{display:inline-block;font-size:.52em;font-weight:900;letter-spacing:.3px;color:var(--va,#FFCB33);
+    border:1px solid var(--va,#FFCB33);border-radius:99px;padding:.22em .8em;opacity:.92}
+  #stage .vpanel .vref{margin:.5em 0 0;font-size:.82em;font-weight:900;color:var(--va,#FFCB33);letter-spacing:-.02em}
+  #stage .vpanel .vrule{width:2em;height:3px;border-radius:9px;background:var(--va,#FFCB33);margin:.42em auto .5em;opacity:.85}
+  #stage .vpanel .vtext{font-size:1em;font-weight:800;line-height:1.62;letter-spacing:-.03em;color:var(--vf,#fff);word-break:keep-all;white-space:pre-line}
+  #stage .vpanel .vnote{margin:.62em auto 0;font-size:.58em;font-weight:800;line-height:1.5;color:var(--vf,#fff);opacity:.82;word-break:keep-all}
+
+  #stage .ppanel{width:100%;max-width:420px;max-height:100%;overflow:auto;border-radius:22px;padding:18px 16px;
+    background:linear-gradient(168deg,#2C2350,#141029 92%);border:1px solid rgba(255,255,255,.16);
+    box-shadow:0 16px 40px rgba(0,0,0,.45);font-size:21px;animation:popIn .26s cubic-bezier(.2,.8,.3,1) both}
+  #stage.wit .ppanel{font-size:24px}
+  #stage .ppanel .ptitle{font-size:.9em;font-weight:900;color:#E6DBFF;letter-spacing:-.02em;margin:0 0 .6em;text-align:center}
+  #stage .ppanel ol{list-style:none;margin:0;padding:0;counter-reset:sp}
+  #stage .ppanel li{counter-increment:sp;display:flex;gap:.5em;padding:.42em 0;border-bottom:1px dashed rgba(255,255,255,.16);
+    font-size:1em;font-weight:800;line-height:1.5;color:#F6F2FF;letter-spacing:-.02em;word-break:keep-all;text-align:left}
+  #stage .ppanel li:last-child{border-bottom:0}
+  #stage .ppanel li::before{content:counter(sp);flex:0 0 auto;width:1.25em;height:1.25em;border-radius:50%;background:rgba(255,255,255,.2);
+    font-size:.62em;font-weight:900;display:flex;align-items:center;justify-content:center;margin-top:.3em}
+  #stage .ppanel .pfoot{margin:.7em 0 0;text-align:center;font-size:.62em;font-weight:800;color:#D8CBFF;opacity:.9}
+
+  #stage .lpanel{width:100%;max-width:420px;max-height:100%;overflow:auto;border-radius:22px;padding:18px 16px;
+    background:linear-gradient(168deg,#FFFDF4,#F1E6D2);color:#241E14;font-size:18px;border:1px solid rgba(255,255,255,.5);
+    box-shadow:0 16px 40px rgba(0,0,0,.45);animation:popIn .26s cubic-bezier(.2,.8,.3,1) both}
+  #stage.wit .lpanel{font-size:20px}
+  #stage .lpanel .lt{font-size:1.15em;font-weight:900;color:#1B5236;letter-spacing:-.03em;margin:0 0 .7em}
+  #stage .litems{list-style:none;margin:0;padding:0}
+  #stage .litems li{display:flex;gap:.55em;padding:.5em 0;border-bottom:1px dashed #DCCCB0;text-align:left;word-break:keep-all}
+  #stage .litems li:last-child{border-bottom:0}
+  #stage .litems li>b{flex:0 0 auto;font-size:1em;font-weight:900;color:#8A5E08;line-height:1.35}
+  #stage .litems .q{display:block;font-size:1em;font-weight:900;color:#241E14;letter-spacing:-.03em;line-height:1.4}
+  #stage .litems .a{display:block;margin-top:.16em;font-size:.86em;font-weight:800;color:#1F6B45;line-height:1.4}
+  #stage .hlist{list-style:none;margin:0;padding:0}
+  #stage .hlist li{display:flex;gap:.6em;align-items:center;padding:.7em 0;border-bottom:1px dashed #DCCCB0;text-align:left}
+  #stage .hlist li:last-child{border-bottom:0}
+  #stage .hlist .hi{flex:0 0 auto;font-size:1.5em}
+  #stage .hlist b{display:block;font-size:.8em;font-weight:900;color:#8A5E08;margin-bottom:.1em}
+  #stage .hlist li>span:last-child{font-size:1em;font-weight:900;color:#2A2318;line-height:1.42;letter-spacing:-.03em;word-break:keep-all}
+
+  #stage .cpanel{width:100%;max-width:400px;border-radius:22px;padding:24px 18px;text-align:center;color:#fff;font-size:18px;
+    background:linear-gradient(155deg,#4FA96C,#175A39);border:1px solid rgba(255,255,255,.25);
+    box-shadow:0 16px 40px rgba(0,0,0,.45);animation:popIn .26s cubic-bezier(.2,.8,.3,1) both}
+  #stage .cpanel .ct{font-size:.8em;font-weight:900;opacity:.9;letter-spacing:.1em}
+  #stage .cpanel .cn{font-size:1.7em;font-weight:900;margin:.3em 0 .2em;letter-spacing:-.03em}
+  #stage .cpanel .cs{font-size:.92em;font-weight:800;opacity:.96}
+  #stage .cpanel .cbar{height:1px;background:rgba(255,255,255,.35);margin:.9em .6em}
+  #stage .cpanel .cb{font-size:.85em;font-weight:800;line-height:1.5;opacity:.96;word-break:keep-all}
+
+  #stage .shint{flex:0 0 auto;padding:6px 13px 7px;display:flex;flex-direction:column;justify-content:center;gap:2px;
+    background:rgba(3,16,11,.62);border-top:1px solid rgba(255,255,255,.08)}
+  #stage .shint .hk{font-size:15px;font-weight:900;letter-spacing:-.03em;line-height:1.34;color:#F0FAF4;word-break:keep-all}
+  #stage .shint .hd{font-size:13.5px;font-weight:800;color:#8FBBA4;letter-spacing:-.02em;line-height:1.34;word-break:keep-all}
+
+  #stage .sctrl{flex:0 0 auto;display:grid;grid-template-columns:1fr 1.3fr;gap:9px;
+    padding:7px 12px calc(9px + env(safe-area-inset-bottom));background:rgba(3,16,11,.72);border-top:1px solid rgba(255,255,255,.1)}
+  #stage .sctrl button{font:inherit;font-size:19px;font-weight:900;letter-spacing:-.04em;min-height:58px;border-radius:16px;cursor:pointer}
+  #stage #sPrev{background:rgba(255,255,255,.1);color:#EAF7EE;border:1.5px solid rgba(255,255,255,.26)}
+  #stage #sNext{background:linear-gradient(135deg,#6FC98E,#2F8A55);color:#fff;border:0;box-shadow:0 6px 16px rgba(47,138,85,.4)}
+  #stage #sPrev:disabled,#stage #sNext:disabled{opacity:.38;box-shadow:none}
+  #stage .sctrl button:active{transform:scale(.985)}
+
+  /* 실제 전도(힌트 가리기) 모드 */
+  #stage.wit .sbar{background:transparent;border-bottom:0;opacity:.62;padding-top:calc(4px + env(safe-area-inset-top))}
+  #stage.wit .stime,#stage.wit .spos{display:none}
+  #stage.wit .swit{margin-left:auto;min-height:36px;font-size:12.5px;background:rgba(255,255,255,.08)}
+  #stage.wit .sexit{min-height:36px;font-size:12.5px;background:rgba(255,255,255,.08)}
+  #stage.wit .sprog{opacity:.3}
+  #stage.wit .shint{display:none}
+  #stage.wit .sctrl{display:flex;justify-content:space-between;gap:10px;background:transparent;border-top:0;
+    padding:4px 12px calc(8px + env(safe-area-inset-bottom))}
+  #stage.wit .sctrl button{min-height:40px;font-size:14px;padding:0 15px;border-radius:99px;opacity:.62;
+    background:transparent;border:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.85);box-shadow:none}
+  #stage.wit #sPrev,#stage.wit #sNext{background:transparent;border:1px solid rgba(255,255,255,.22);
+    color:rgba(255,255,255,.85);box-shadow:none;opacity:.6}
+  #stage.wit .sctrl button:active{opacity:1}
+  #stage.wit .ppanel .pfoot{display:none}
+
+  @keyframes popIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -362,7 +494,7 @@
         <label class="wide">교회 이름<input id="inChurch" type="text" autocomplete="off" maxlength="20" placeholder="우리 교회"></label>
       </div>
       <p class="snote">이름을 바꾸면 대본·요한복음 1:12·다섯 손가락 약속이 <b>바로 바뀝니다.</b> 입력은 이 기기에 저장돼요.<br>🔊 시범 음성은 ‘우리 친구’ 기준으로 미리 녹음되어 있어요.</p>
-      <button class="sreset" id="resetBtn">연습 기록 지우기(체크·발표 시간)</button>
+      <button class="sreset" id="resetBtn">연습 기록 지우기(단계 체크)</button>
     </div>
     <div id="chips" role="tablist" aria-label="8단계"></div>
   </header>
@@ -411,6 +543,24 @@
   <div class="ovw-body" id="ovwBody"></div>
 </div>
 
+<div id="stage" aria-hidden="true" role="dialog" aria-modal="true" aria-label="실전 연습 전체화면">
+  <div class="sbar">
+    <div class="spos"><b id="sPos">1 / 1</b><span id="sStepLbl">1단계 만남</span></div>
+    <button id="sWit" class="swit">👁 힌트 숨김</button>
+    <button id="sExit" class="sexit" aria-label="전체화면 나가기">✕ 나가기</button>
+  </div>
+  <div class="sprog"><i id="sProg"></i></div>
+  <div class="smain" id="sMain">
+    <div class="cardstage" id="cardStage"><div class="card3d" id="card3d"></div></div>
+    <div class="panelwrap" id="panelWrap" hidden></div>
+  </div>
+  <div class="shint" id="sHint"></div>
+  <div class="sctrl">
+    <button id="sPrev">◀ 이전</button>
+    <button id="sNext">다음 ▶</button>
+  </div>
+</div>
+
 <audio id="aud" preload="none" playsinline></audio>
 <div id="toast" role="status" aria-live="polite"></div>
 
@@ -430,7 +580,7 @@
     if (raw) {
       var o = JSON.parse(raw);
       if (o && typeof o === 'object') {
-        ['name', 'teacher', 'church', 'fs', 'spd', 'idx'].forEach(function (k) { if (o[k] !== undefined) state[k] = o[k]; });
+        ['name', 'teacher', 'church', 'fs', 'spd', 'idx', 'wit'].forEach(function (k) { if (o[k] !== undefined) state[k] = o[k]; });
         if (o.done && typeof o.done === 'object') state.done = o.done;
         if (o.keys && typeof o.keys === 'object') state.keys = o.keys;
       }
@@ -884,13 +1034,15 @@
       + '<h2>' + esc(s.title) + '</h2>'
       + '<p class="goal">🎯 ' + esc(s.goal) + '</p></div>';
 
-    html += playerHTML();
+    if (mode === 'rehearsal') html += rehearsalBox();
+
+    if (mode === 'script') html += playerHTML();
 
     if (mode === 'rehearsal') {
       var done = !!state.done[s.id];
       html += '<button class="checkrow' + (done ? ' done' : '') + '" id="doneBtn">'
         + '<span class="bx">' + (done ? '✓' : '') + '</span>'
-        + '<span class="ct">' + (done ? '이 단계 연습 완료!' : '이 단계 연습 완료로 표시') + '<span>' + fmt(times[s.id] || 0) + ' · 8단계 중 ' + doneCount() + '개 완료</span></span></button>';
+        + '<span class="ct">' + (done ? '이 단계 연습 완료!' : '이 단계 연습 완료로 표시') + '<span>8단계 중 ' + doneCount() + '개 완료</span></span></button>';
     }
 
     if (mode === 'memory') {
@@ -921,7 +1073,7 @@
     prevBtn.disabled = idx === 0;
     nextBtn.disabled = idx === STEPS.length - 1;
     nextBtn.textContent = idx === STEPS.length - 1 ? '끝' : '다음 →';
-    rebar.hidden = mode !== 'rehearsal';
+    rebar.hidden = true;
     updateTimerUI();
     updatePlayUI();
   }
@@ -952,6 +1104,17 @@
       revealed[STEPS[idx].id] = {};
       render(true);
       toast('핵심 단어만 남겼어요');
+    });
+    var stgStart = $('stageStart');
+    if (stgStart) stgStart.addEventListener('click', function () { openStage({ from: stageFrom }); });
+    var stgWit = $('stageWit');
+    if (stgWit) stgWit.addEventListener('click', function () { openStage({ from: stageFrom, wit: true }); });
+    var stgFrom = $('stageFrom');
+    if (stgFrom) stgFrom.addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-from]');
+      if (!b) return;
+      stageFrom = b.getAttribute('data-from');
+      Array.prototype.forEach.call(stgFrom.children, function (c) { c.classList.toggle('on', c === b); });
     });
   }
 
@@ -1136,6 +1299,331 @@
     toastT = setTimeout(function () { toastEl.classList.remove('on'); }, 2200);
   }
 
+  /* ============================================================
+     ⏱ 실전 연습 · 전체화면 장면(Scene) 모드  + 실제 전도
+     ============================================================ */
+  var SCENES = [
+    /* ── 1단계 만남 ── */
+    { s: 1, type: 'card', art: 'plain', k: '인사 · 아이 이름 묻기', d: '“안녕! 친구야, 안녕~” · “이름이 뭐니?”' },
+    { s: 1, type: 'card', art: 'plain', k: '소속·이름 소개 → 허락받기', d: '“혹시 이런 딱지 본 적 있니?” → “잠시 시간 되니?”' },
+    /* ── 2단계 하나님 ── */
+    { s: 2, type: 'card', art: 'circle', k: '노란 원 → 하나님', d: '모든 자연을 만드신 분 · 잔디·나무·하늘·해·달·별' },
+    { s: 2, type: 'card', art: 'circle', k: '부모님 통해 태어나게 · 사랑', d: '“만드셨으니 너무너무 사랑하셔”' },
+    { s: 2, type: 'verse', v: 'v1', k: '📖 함께 읽기', d: '하나님이 얼마나 사랑하시는지 — 소리 내어 함께' },
+    { s: 2, type: 'card', art: 'circle', k: '하늘나라 초청', d: '❓ “하늘나라에서 살고 싶지 않니?” → 대답을 꼭 듣기' },
+    /* ── 3단계 죄 ── */
+    { s: 3, type: 'card', art: 'heartB', k: '검은 하트 = 죄', d: '죄 때문에 어두워진 마음 · 겁주지 않기' },
+    { s: 3, type: 'card', art: 'heartB', k: '죄 = 말 · 생각 · 행동', d: '거짓말 · 욕 · 미워하기 · 불순종 · 싸우기' },
+    { s: 3, type: 'verse', v: 'v2', k: '📖 함께 읽기', d: '“모든 사람” = 선생님도, 나도 — 함께 읽기' },
+    { s: 3, type: 'card', art: 'heartB', k: '❓ “혹시 죄가 있니?”', d: '대신 말해 주지 말고 기다린 뒤 “맞아, 우리는 그래”' },
+    { s: 3, type: 'card', art: 'heartB', k: '죄의 벌 = 지옥', d: '하나님과 가장 멀리 · 영원히' },
+    /* ── 4단계 예수님 ── */
+    { s: 4, type: 'card', art: 'cross', k: '“하지만!” → 붉은 십자가 = 예수님', d: '죄 없으신 하나님의 아들 · 목소리를 밝게' },
+    { s: 4, type: 'card', art: 'cross', k: '내 벌을 대신 받으심', d: '십자가 벌 · 모든 피를 흘리심' },
+    { s: 4, type: 'verse', v: 'v3', k: '📖 함께 읽기', d: '죄가 용서받으려면 피가 흘러야 해' },
+    { s: 4, type: 'verse', v: 'v4', k: '📖 사흘 만에 다시 살아나사', d: '사흘 = 3일 · 손가락으로 세어 보여 주기' },
+    { s: 4, type: 'card', art: 'cross', k: '지금도 나를 위해 기도하심', d: '천국에서 우리 친구를 위해 기도하고 계셔' },
+    /* ── 5단계 초청 ── */
+    { s: 5, type: 'verse', v: 'v5', k: '📖 함께 읽기', d: '“영접하는 자에게 자녀가 되는 권세”' },
+    { s: 5, type: 'card', art: 'cross', k: '영접 = 죄 인정 + 믿음 + 모심', d: '❓ “예수님을 마음에 믿고 싶니?” → 대답 듣기' },
+    { s: 5, type: 'list', kind: 'q', k: '❓ 확인 질문 4가지', d: '정답을 대신 말하지 말고 한 번 더 생각하게' },
+    { s: 5, type: 'prayer', p: 0, k: '🙏 영접기도 1단계 · 따라 읽기', d: '선생님이 한 마디 → 아이가 따라 읽기' },
+    { s: 5, type: 'prayer', p: 1, k: '🙏 영접기도 2단계 · 아이가 직접', d: '눈 감는 이유도 설명해 주기' },
+    { s: 5, type: 'verse', v: 'v6', k: '📖 이름 넣어 읽기', d: '‘자’ 자리에 아이 이름을 넣어 함께' },
+    { s: 5, type: 'card', art: 'plain', k: '🎉 하나님의 자녀가 되었어', d: '“축하해, {name:아}!”' },
+    /* ── 6단계 확신 ── */
+    { s: 6, type: 'card', art: 'heartW', k: '흰 하트 = 구원의 확신', d: '천국 가는 그날까지 자녀로 살아가' },
+    { s: 6, type: 'verse', v: 'v7', k: '📖 함께 읽기', d: '“결코 버리지 아니하고 떠나지 않으리라”' },
+    { s: 6, type: 'hands', k: '✋ 다섯 손가락 약속', d: '손 펴서 같이 · 손 바꿔 한 번 더' },
+    { s: 6, type: 'verse', v: 'v8', k: '📖 자백 → 용서', d: '자백 = 하나님께 솔직하게 말씀드리기' },
+    { s: 6, type: 'card', art: 'heartW', k: '다시 죄 지으면? 자백', d: '“하나님, 죄송해요. 용서해 주세요”' },
+    /* ── 7단계 성장 ── */
+    { s: 7, type: 'card', art: 'green', k: '초록 = 자라남', d: '예수님을 더 알아가고 자라요' },
+    { s: 7, type: 'verse', v: 'v9', k: '📖 함께 읽기', d: '풀과 나무처럼 자라 가라' },
+    { s: 7, type: 'list', kind: 'g', k: '🌱 자라는 4가지', d: '예배 · 말씀과 기도 · 순종 · 전하기' },
+    { s: 7, type: 'card', art: 'green', k: '부모님 허락 → 어린이 예배', d: '“성경책 있니?” · 4번 나오면 성경 선물' },
+    /* ── 8단계 마무리 ── */
+    { s: 8, type: 'card', art: 'green', k: '❓ “오늘 어떤 게 가장 감사하니?”', d: '아이 감사기도를 끝까지 듣기' },
+    { s: 8, type: 'prayer', p: 2, k: '🙏 축복기도', d: '아이 이름을 넣어 한 문장씩 천천히' },
+    { s: 8, type: 'cardmsg', k: '교회·이름 카드 건네기', d: '“부모님께 꼭 보여 드리세요” · “안녕!”' }
+  ];
+
+  var SPRAYERS = [
+    {
+      t: '영접기도 · 1단계 (따라 읽기)', foot: '선생님이 한 마디 읽고 → 아이가 따라 읽기',
+      lines: ['하나님,', '저는 죄를 지었어요. 죄송해요.', '나를 위해 예수님이 죽으시고 다시 사신 거 믿어요.', '예수님, 내 마음에 오세요.', '내 마음을 바꿔 주시고 하나님의 방법대로 살게 해 주세요.', '예수님의 이름으로 기도합니다. 아멘.']
+    },
+    {
+      t: '영접기도 · 2단계 (아이가 직접)', foot: '아이 말로 조금 달라져도 괜찮아요. 끝까지 기다려 주세요.',
+      lines: ['하나님, 제가 죄를 지었어요. 죄송해요.', '예수님이 저의 죄를 대신해서 십자가에서 죽으시고 다시 살아나신 것을 믿어요.', '예수님, 지금 제 마음에 와 주세요.', '저를 변화시켜 주시고 제가 하나님의 방법대로 살 수 있게 도와주세요.', '예수님의 이름으로 기도드렸습니다. 아멘.']
+    },
+    {
+      t: '선생님의 축복기도', foot: '아이 이름을 넣어 천천히, 한 문장씩',
+      lines: ['하나님, 오늘 이렇게 {name:을} 만나서 예수님에 대해서 전하게 하시고,', '{name:이} 예수님을 진심으로 믿어 하나님의 자녀가 되게 하신 것을 감사드립니다.', '{name:이} 천국 가는 그날까지 좋은 친구와 좋은 선생님 만남의 축복을 주시고,', '예수님을 전하는 하나님의 자녀로 잘 자랄 수 있도록 도와주세요.', '예수님의 이름으로 기도합니다. 아멘.']
+    }
+  ];
+
+  var SLISTS = {
+    q: {
+      t: '❓ 이해 확인 질문 4가지 (+1)',
+      items: [
+        ['① 하나님은 어떤 분이시지?', '모든 것을 만드신 분, 나를 사랑하시는 분'],
+        ['② 무엇 때문에 꼭 예수님을 믿어야 하지?', '죄를 지었기 때문에'],
+        ['③ 이 죄에 대한 하나님의 벌은 무엇이지?', '하나님과 멀어져서 지옥에 가게 됨'],
+        ['④ 예수님이 우리를 위해 어떤 일을 해 주셨지?', '십자가에서 죽으시고 다시 살아나심'],
+        ['＋ 그러면 어떻게 해야 죄를 용서받지?', '예수님을 믿어야 함']
+      ]
+    },
+    g: {
+      t: '🌱 자라는 4가지 방법',
+      items: [
+        ['① 교회 어린이 예배에 나오기', '부모님께 꼭 허락 받고, 예배 시간에 맞춰'],
+        ['② 성경 읽기와 기도', '마가복음부터 · 슬플 때도 기쁠 때도 언제든'],
+        ['③ 말씀대로 순종하고 실천하기', '읽은 말씀을 그대로 해 보기'],
+        ['④ 친구와 가족에게 예수님 전하기', '선생님이 나에게 전한 것처럼']
+      ]
+    }
+  };
+
+  /* 복음딱지 그림 — 실제 딱지 색·비율 (진한 초록 #009E60) */
+  var HEART_D = 'M200 306 C128 250 92 208 92 166 C92 134 118 110 148 110 C172 110 190 122 200 138 C210 122 228 110 252 110 C282 110 308 134 308 166 C308 208 272 250 200 306 Z';
+  function cardSVG(kind) {
+    var icon = '';
+    if (kind === 'circle') icon = '<circle cx="200" cy="198" r="102" fill="#FFD400"/>';
+    else if (kind === 'heartB') icon = '<path d="' + HEART_D + '" fill="#161616"/>';
+    else if (kind === 'heartW') icon = '<path d="' + HEART_D + '" fill="#FFFFFF"/>';
+    else if (kind === 'cross') icon = '<g fill="#E23B2E"><rect x="176" y="62" width="48" height="272" rx="5"/><rect x="104" y="148" width="192" height="48" rx="5"/></g>';
+    else if (kind === 'green') icon = '<g fill="#FFFFFF"><path d="M200 302 C200 262 200 224 200 190" fill="none" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round"/>'
+      + '<path d="M200 216 C200 174 168 148 130 148 C130 192 164 216 200 216 Z"/>'
+      + '<path d="M200 188 C200 152 228 128 262 128 C262 166 234 188 200 188 Z" fill-opacity=".92"/></g>';
+    return '<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="복음딱지 그림">'
+      + '<rect x="0" y="0" width="400" height="400" rx="20" fill="#009E60"/>'
+      + '<line x1="200" y1="12" x2="200" y2="388" stroke="#0A6B41" stroke-opacity=".30" stroke-width="2"/>'
+      + '<line x1="12" y1="200" x2="388" y2="200" stroke="#0A6B41" stroke-opacity=".30" stroke-width="2"/>'
+      + icon + '</svg>';
+  }
+
+  function stepOf(sc) { return STEPS[sc.s - 1]; }
+
+  function scenePanel(sc) {
+    if (sc.type === 'verse') {
+      var v = VERSES[sc.v], th = THEMES[v.theme] || THEMES.yellow;
+      return '<div class="vpanel" style="--vb:' + th.bg + ';--vf:' + th.fg + ';--va:' + th.accent + '">'
+        + '<span class="vtag">' + stepOf(sc).num + '단계 · ' + esc(stepOf(sc).label) + '</span>'
+        + '<div class="vref">' + esc(v.ref) + '</div><div class="vrule"></div>'
+        + '<div class="vtext">' + fill(v.text) + '</div>'
+        + (v.note ? '<div class="vnote">' + fill(v.note) + '</div>' : '') + '</div>';
+    }
+    if (sc.type === 'prayer') {
+      var p = SPRAYERS[sc.p], lis = '';
+      for (var i = 0; i < p.lines.length; i++) lis += '<li>' + fill(p.lines[i]) + '</li>';
+      return '<div class="ppanel"><div class="ptitle">🙏 ' + esc(p.t) + '</div><ol>' + lis + '</ol>'
+        + (p.foot ? '<div class="pfoot">' + esc(p.foot) + '</div>' : '') + '</div>';
+    }
+    if (sc.type === 'list') {
+      var L = SLISTS[sc.kind], it = '';
+      for (var j = 0; j < L.items.length; j++) {
+        it += '<li><b>' + esc(L.items[j][0].charAt(0)) + '</b><span><span class="q">' + fill(L.items[j][0].slice(1)) + '</span>'
+          + '<span class="a">' + fill(L.items[j][1]) + '</span></span></li>';
+      }
+      return '<div class="lpanel"><div class="lt">' + esc(L.t) + '</div><ul class="litems">' + it + '</ul></div>';
+    }
+    if (sc.type === 'hands') {
+      return '<div class="lpanel"><div class="lt">✋ 다섯 손가락 약속</div><ul class="hlist">'
+        + '<li><span class="hi">🤚</span><span><b>한 손</b>예수님은 ' + fill('{name:을}') + ' 절대로 떠나지 않으신다</span></li>'
+        + '<li><span class="hi">✋</span><span><b>손 바꿔서</b>예수님은 ' + fill('{name:이}') + ' 옳은 일 하도록 돕는 분이시다</span></li>'
+        + '</ul></div>';
+    }
+    if (sc.type === 'cardmsg') {
+      return '<div class="cpanel"><div class="ct">오늘 만난 선생님</div>'
+        + '<div class="cn">' + esc(state.name) + '</div>'
+        + '<div class="cs">' + esc(state.church) + ' · ' + esc(teacherLabel()) + '</div>'
+        + '<div class="cbar"></div>'
+        + '<div class="cb">부모님께 꼭 보여 드리고, 어린이 예배에서 만나요</div></div>';
+    }
+    return '';
+  }
+
+  /* ---------- stage 요소 ---------- */
+  var stageEl = $('stage'), sMain = $('sMain'), cardStage = $('cardStage'), card3d = $('card3d'),
+      panelWrap = $('panelWrap'), sHint = $('sHint'), sPos = $('sPos'), sStepLbl = $('sStepLbl'),
+      sWitB = $('sWit'), sExitB = $('sExit'),
+      sPrevB = $('sPrev'), sNextB = $('sNext'), sProgBar = $('sProg');
+  var stageState = { open: false, i: 0, busy: false, wit: false };
+  var stageFrom = 'here';
+
+  function stageSync() {
+    var sc = SCENES[stageState.i], st = stepOf(sc);
+    sPos.textContent = (stageState.i + 1) + ' / ' + SCENES.length;
+    sStepLbl.textContent = st.num + '단계 ' + st.label;
+    sProgBar.style.width = (((stageState.i + 1) / SCENES.length) * 100).toFixed(1) + '%';
+    sPrevB.disabled = stageState.i === 0;
+    sNextB.disabled = stageState.i === SCENES.length - 1;
+    sNextB.textContent = stageState.i === SCENES.length - 1 ? '마침 ✕' : '다음 ▶';
+    sHint.innerHTML = '<div class="hk">' + fill(sc.k) + '</div>' + (sc.d ? '<div class="hd">' + fill(sc.d) + '</div>' : '');
+    if (st.num - 1 !== idx) { idx = st.num - 1; state.idx = idx; save(); renderChips(); }
+  }
+
+  function stageFit() {
+    var p = panelWrap.firstElementChild;
+    if (!p) return;
+    p.style.fontSize = '';
+    var size = parseFloat(getComputedStyle(p).fontSize) || 20, guard = 0;
+    while (p.scrollHeight > panelWrap.clientHeight + 2 && size > 13 && guard < 30) {
+      size -= 1; p.style.fontSize = size + 'px'; guard++;
+    }
+  }
+
+  function stageEnter(ni, animate) {
+    var sc = SCENES[ni];
+    stageState.i = ni;
+    stageSync();
+    if (sc.type === 'card') {
+      panelWrap.hidden = true; cardStage.hidden = false;
+      card3d.style.transition = 'none';
+      card3d.style.transform = animate ? 'rotateX(89deg)' : '';
+      card3d.style.opacity = animate ? '.3' : '1';
+      card3d.innerHTML = cardSVG(sc.art);
+      if (animate) {
+        void card3d.offsetWidth;
+        card3d.style.transition = 'transform .24s cubic-bezier(.2,.75,.3,1), opacity .24s';
+        card3d.style.transform = 'rotateX(0deg)';
+        card3d.style.opacity = '1';
+      }
+    } else {
+      cardStage.hidden = true; panelWrap.hidden = false;
+      panelWrap.innerHTML = scenePanel(sc);
+      stageFit();
+    }
+  }
+
+  function markStepDone(num) {
+    var id = STEPS[num - 1].id;
+    if (!state.done[id]) { state.done[id] = true; save(); renderChips(); }
+  }
+
+  function stageGo(ni, animate) {
+    if (stageState.busy) return;
+    if (ni < 0 || ni >= SCENES.length) return;
+    var from = SCENES[stageState.i], to = SCENES[ni];
+    if (animate === false) { stageEnter(ni, false); return; }
+    stageState.busy = true;
+    if (ni > stageState.i && to.s !== from.s) markStepDone(from.s);
+    if (from.type === 'card' && to.type === 'card') {
+      /* 딱지가 접혔다 펼쳐지며 다음 그림 */
+      stageState.i = ni; stageSync();
+      card3d.style.transition = 'transform .19s cubic-bezier(.45,0,.75,0), opacity .19s';
+      card3d.style.transform = 'rotateX(-89deg)';
+      card3d.style.opacity = '.5';
+      setTimeout(function () {
+        card3d.innerHTML = cardSVG(to.art);
+        card3d.style.transition = 'none';
+        card3d.style.transform = 'rotateX(89deg)';
+        void card3d.offsetWidth;
+        card3d.style.transition = 'transform .24s cubic-bezier(.2,.75,.3,1), opacity .24s';
+        card3d.style.transform = 'rotateX(0deg)';
+        card3d.style.opacity = '1';
+        setTimeout(function () { stageState.busy = false; }, 250);
+      }, 195);
+      return;
+    }
+    if (from.type === 'card') {
+      stageState.i = ni; stageSync();
+      card3d.style.transition = 'transform .16s ease-in, opacity .16s';
+      card3d.style.transform = 'rotateX(-89deg)';
+      card3d.style.opacity = '.15';
+      setTimeout(function () { stageEnter(ni, false); stageState.busy = false; }, 170);
+      return;
+    }
+    if (to.type === 'card') {
+      stageEnter(ni, true);
+      setTimeout(function () { stageState.busy = false; }, 260);
+      return;
+    }
+    stageEnter(ni, false);
+    stageState.busy = false;
+  }
+
+  function applyWit(on) {
+    stageState.wit = !!on;
+    state.wit = stageState.wit ? 1 : 0;
+    save();
+    stageEl.classList.toggle('wit', stageState.wit);
+    sWitB.textContent = stageState.wit ? '👁 힌트 보기' : '👁 힌트 숨김';
+    if (!panelWrap.hidden) { panelWrap.innerHTML = scenePanel(SCENES[stageState.i]); stageFit(); }
+  }
+
+  function openStage(opts) {
+    opts = opts || {};
+    var target = 0;
+    if (opts.from !== 'first') {
+      for (var i = 0; i < SCENES.length; i++) { if (SCENES[i].s === STEPS[idx].num) { target = i; break; } }
+    }
+    if (opts.wit !== undefined) { state.wit = opts.wit ? 1 : 0; save(); }
+    stageState.open = true;
+    stageEl.classList.add('open');
+    stageEl.setAttribute('aria-hidden', 'false');
+    stageEl.classList.toggle('wit', !!state.wit);
+    sWitB.textContent = state.wit ? '👁 힌트 보기' : '👁 힌트 숨김';
+    stageState.wit = !!state.wit;
+    stageState.busy = false;
+    stageEnter(target, false);
+    try {
+      var el = document.documentElement;
+      if (el.requestFullscreen) {
+        var pr = el.requestFullscreen();
+        if (pr && pr.catch) pr.catch(function () {});
+      }
+    } catch (e) {}
+  }
+
+  function closeStage() {
+    if (!stageState.open) return;
+    stageState.open = false;
+    stageEl.classList.remove('open');
+    stageEl.setAttribute('aria-hidden', 'true');
+    if (document.fullscreenElement) {
+      try {
+        var pr = document.exitFullscreen();
+        if (pr && pr.catch) pr.catch(function () {});
+      } catch (e) {}
+    }
+    idx = SCENES[stageState.i].s - 1;
+    state.idx = idx; save();
+    renderChips(); render();
+  }
+
+  function rehearsalBox() {
+    var st = STEPS[idx], n = 0;
+    for (var i = 0; i < SCENES.length; i++) { if (SCENES[i].s === st.num) n++; }
+    return '<div class="rehbox">'
+      + '<button id="stageStart" class="bigstart">▶ 실전 연습 시작 (전체화면)</button>'
+      + '<div class="seg" id="stageFrom">'
+      + '<button data-from="here" class="' + (stageFrom === 'first' ? '' : 'on') + '">현재 단계부터</button>'
+      + '<button data-from="first" class="' + (stageFrom === 'first' ? 'on' : '') + '">1단계 만남부터</button>'
+      + '</div>'
+      + '<div class="rehline">이 단계 장면 <b>' + n + '</b>개 · 전체 <b>' + SCENES.length + '</b>장면</div>'
+      + '<button id="stageWit" class="bigwit">🙈 힌트 가리고 전도하기</button>'
+      + '<p class="rehn">아이에게 보여 주듯 스마트폰 전체화면으로 연습해요 · 딱지 화면을 눌러도 다음 장면 · 실제로 전도할 때는 <b>👁 힌트 숨김</b></p>'
+      + '</div>';
+  }
+
+  sNextB.addEventListener('click', function () { stageGo(stageState.i + 1, true); });
+  sPrevB.addEventListener('click', function () { stageGo(stageState.i - 1, true); });
+  sExitB.addEventListener('click', closeStage);
+  sWitB.addEventListener('click', function () { applyWit(!stageState.wit); });
+  cardStage.addEventListener('click', function (e) {
+    if (!stageState.open || stageState.busy) return;
+    if (stageState.wit) {
+      var r = cardStage.getBoundingClientRect();
+      var x = (e.clientX || 0) - r.left;
+      if (x < r.width * 0.3) stageGo(stageState.i - 1, true);
+      else stageGo(stageState.i + 1, true);
+      return;
+    }
+    stageGo(stageState.i + 1, true);
+  });
+
   /* ---------- navigation ---------- */
   function go(i) {
     if (i < 0 || i >= STEPS.length) return;
@@ -1151,9 +1639,10 @@
     var b = e.target.closest('button[data-mode]');
     if (!b) return;
     mode = b.getAttribute('data-mode');
+    if (mode !== 'script' && pstate.playing) { pstate.continuous = false; pauseAudio(); }
     Array.prototype.forEach.call(modesEl.children, function (c) { c.classList.toggle('on', c === b); });
     render();
-    if (mode === 'rehearsal' && !timer.running && timer.total === 0) toast('▶ 시작을 누르면 발표 시간이 재어져요');
+    if (mode === 'rehearsal') toast('▶ 실전 연습 시작을 누르면 스마트폰 전체화면으로 연습해요');
   });
   prevBtn.addEventListener('click', function () { go(idx - 1); });
   nextBtn.addEventListener('click', function () { go(idx + 1); });
@@ -1203,6 +1692,12 @@
   });
 
   document.addEventListener('keydown', function (e) {
+    if (stageState && stageState.open) {
+      if (e.key === 'Escape') { closeStage(); return; }
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); stageGo(stageState.i + 1, true); return; }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); stageGo(stageState.i - 1, true); return; }
+      return;
+    }
     if (e.key === 'Escape') { closeVerse(); closeOvw(); }
     if (vmodal.classList.contains('open') || ovw.classList.contains('open')) return;
     if (e.key === 'ArrowRight') go(idx + 1);
