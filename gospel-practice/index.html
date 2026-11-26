@@ -1560,7 +1560,8 @@
   function openStage(opts) {
     opts = opts || {};
     var target = 0;
-    if (opts.from !== 'first') {
+    /* 'start'·'first' = 늘 1단계 첫 장면부터, 그 밖('here') = 지금 보고 있는 단계의 첫 장면부터 */
+    if (opts.from !== 'first' && opts.from !== 'start') {
       for (var i = 0; i < SCENES.length; i++) { if (SCENES[i].s === STEPS[idx].num) { target = i; break; } }
     }
     /* 실전 연습 진입은 기본이 ‘힌트 보임’ · ‘힌트 가리고 전도하기’로 들어올 때만 숨김 */
@@ -1653,10 +1654,10 @@
     var b = e.target.closest('button[data-mode]');
     if (!b) return;
     var m = b.getAttribute('data-mode');
-    /* 2026-11-26 상훈님: ⏱ 실전 연습 탭은 중간 안내 없이 곧바로 전체화면 연습 무대로 */
+    /* 2026-11-26 상훈님: ⏱ 실전 연습 탭은 곧바로 전체화면 연습 무대로, 어디서 누르든 1단계 만남부터 */
     if (m === 'rehearsal') {
       if (pstate.playing) { pstate.continuous = false; pauseAudio(); }
-      openStage({ from: 'here' });
+      openStage({ from: 'start' });
       return;
     }
     if (m !== 'script' && pstate.playing) { pstate.continuous = false; pauseAudio(); }
