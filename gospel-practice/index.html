@@ -363,8 +363,10 @@
   /* ---------- 실전 연습 전체화면 (#stage) ---------- */
   #stage{position:fixed;inset:0;z-index:999;display:none;flex-direction:column;
     background:radial-gradient(125% 78% at 50% 5%,#1A4B34 0%,#0C271E 52%,#04120D 100%);
-    color:#fff;-webkit-user-select:none;user-select:none}
+    color:#fff;-webkit-user-select:none;user-select:none;overscroll-behavior:contain}
   #stage.open{display:flex}
+  /* 무대가 열린 동안 뒤 화면(#app) 스크롤 잠금 — 전체화면 API 없이도 뒤가 움직이지 않게 */
+  html.stage-lock #app{overflow:hidden}
   #stage .sbar{flex:0 0 auto;display:flex;align-items:center;gap:7px;min-height:46px;
     padding:calc(5px + env(safe-area-inset-top)) 10px 5px;background:rgba(3,16,11,.6);
     border-bottom:1px solid rgba(255,255,255,.1)}
@@ -1557,6 +1559,10 @@
     if (!panelWrap.hidden) { panelWrap.innerHTML = scenePanel(SCENES[stageState.i]); stageFit(); }
   }
 
+  function lockPage(on) {
+    document.documentElement.classList.toggle('stage-lock', !!on);
+  }
+
   function openStage(opts) {
     opts = opts || {};
     var target = 0;
@@ -1574,13 +1580,10 @@
     stageState.wit = !!state.wit;
     stageState.busy = false;
     stageEnter(target, false);
-    try {
-      var el = document.documentElement;
-      if (el.requestFullscreen) {
-        var pr = el.requestFullscreen();
-        if (pr && pr.catch) pr.catch(function () {});
-      }
-    } catch (e) {}
+    /* 2026-11-26: 브라우저 전체화면 API를 쓰지 않는다.
+       안드로이드 크롬은 requestFullscreen() 때 하단에 “전체 화면을 종료하려면 …” 시스템 안내창을
+       띄워 ◀ 이전 · 다음 ▶ 버튼을 가리기 때문에, CSS 전체화면(#stage: fixed;inset:0)만으로 화면을 채운다. */
+    lockPage(true);
   }
 
   function closeStage() {
@@ -1588,12 +1591,7 @@
     stageState.open = false;
     stageEl.classList.remove('open');
     stageEl.setAttribute('aria-hidden', 'true');
-    if (document.fullscreenElement) {
-      try {
-        var pr = document.exitFullscreen();
-        if (pr && pr.catch) pr.catch(function () {});
-      } catch (e) {}
-    }
+    lockPage(false);
     idx = SCENES[stageState.i].s - 1;
     state.idx = idx; save();
     /* 2026-11-26: 나가면 그 단계의 📖 대본 보기로 돌아온다 */
