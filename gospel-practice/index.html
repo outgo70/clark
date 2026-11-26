@@ -1595,7 +1595,16 @@
     }
     idx = SCENES[stageState.i].s - 1;
     state.idx = idx; save();
+    /* 2026-11-26: 나가면 그 단계의 📖 대본 보기로 돌아온다 */
+    setMode('script');
     renderChips(); render();
+  }
+
+  function setMode(m) {
+    mode = m;
+    Array.prototype.forEach.call(modesEl.children, function (c) {
+      c.classList.toggle('on', c.getAttribute('data-mode') === m);
+    });
   }
 
   function rehearsalBox() {
@@ -1643,11 +1652,16 @@
   modesEl.addEventListener('click', function (e) {
     var b = e.target.closest('button[data-mode]');
     if (!b) return;
-    mode = b.getAttribute('data-mode');
-    if (mode !== 'script' && pstate.playing) { pstate.continuous = false; pauseAudio(); }
-    Array.prototype.forEach.call(modesEl.children, function (c) { c.classList.toggle('on', c === b); });
+    var m = b.getAttribute('data-mode');
+    /* 2026-11-26 상훈님: ⏱ 실전 연습 탭은 중간 안내 없이 곧바로 전체화면 연습 무대로 */
+    if (m === 'rehearsal') {
+      if (pstate.playing) { pstate.continuous = false; pauseAudio(); }
+      openStage({ from: 'here' });
+      return;
+    }
+    if (m !== 'script' && pstate.playing) { pstate.continuous = false; pauseAudio(); }
+    setMode(m);
     render();
-    if (mode === 'rehearsal') toast('▶ 실전 연습 시작을 누르면 스마트폰 전체화면으로 연습해요');
   });
   prevBtn.addEventListener('click', function () { go(idx - 1); });
   nextBtn.addEventListener('click', function () { go(idx + 1); });
